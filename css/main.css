@@ -174,12 +174,15 @@ font-size: 2rem;
 }
 .userName{
   display:none;
+  width: 80%;
 }
 .password{
   display:none;
+  width: 80%;
 }
 .verifyPassword{
   display:none;
+  width:80%;
 }
 .pickImage{
   display:none;

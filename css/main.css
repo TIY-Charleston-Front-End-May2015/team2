@@ -1,10 +1,9 @@
 body{
+
   width: 100%;
+  margin: 0;
 }
 
-aside {
-  width: 20%;
-}
 
 section {
   width: 80%;
@@ -14,16 +13,6 @@ section {
 }
 
 /* Aside */
-
-aside {
-  width: 20%;
-  height: 50em;
-  margin: 0em;
-  padding: 0em;
-  display: flex;
-}
-
-
 input {
   width: 47em;
   height: 2.2em;
@@ -67,10 +56,6 @@ font-size: 2rem;
   display: none;
 }
 
-.active {
-  width: 100%;
-  display: block;
-}
 
 .pageWrapper {
   width: 80%;
@@ -148,4 +133,76 @@ font-size: 2rem;
   width:20%;
   border: 1px solid #d8d8d8;
   background-color: #1E9526;
+}
+
+.userBar{
+  width: 20%;
+  background-color: #1e9525;
+  display:inline-block;
+  height: 50em;
+}
+
+.initialVisit{
+  margin-top: 10%;
+  padding-left:10%;
+  display:none;
+
+}
+.returnUser{
+  display:none;
+
+}
+.newUser{
+  display:none;
+}
+
+.initialVisit a:link{
+  font-size: .8em;
+  color: #8bdc91;
+  margin-right: 2%;
+  text-decoration:none;
+}
+.initialVisit a:hover{
+  color: #0B7712;
+  text-decoration:none;
+}
+.initialVisit a:visited{
+  text-decoration:none;
+}
+.loginData{
+  margin-top: 5%;
+}
+.userName{
+  display:none;
+}
+.password{
+  display:none;
+}
+.verifyPassword{
+  display:none;
+}
+.pickImage{
+  display:none;
+}
+.imageOption{
+  width:30%;
+  margin-top:2%;
+  display:inline-block;
+}
+.imageOption img:hover{
+  width: 300%;
+  height:300%;
+  display:block;
+}
+.userSubmit{
+  margin-top: 8%;
+  display:none;
+}
+.userCreate{
+  display:none;
+}
+
+
+.active{
+  display:block;
 }

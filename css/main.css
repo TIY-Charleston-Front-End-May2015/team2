@@ -1,0 +1,151 @@
+body{
+  width: 100%;
+}
+
+aside {
+  width: 20%;
+}
+
+section {
+  width: 80%;
+  height: 50em;
+  margin: 0em;
+  padding: 0em;
+}
+
+/* Aside */
+
+aside {
+  width: 20%;
+  height: 50em;
+  margin: 0em;
+  padding: 0em;
+  display: flex;
+}
+
+
+input {
+  width: 47em;
+  height: 2.2em;
+  margin: .8em;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid #d8d8d8;
+  display: flex;
+  font-size: .9em;
+}
+
+/* Buttons */
+
+.sendButton {
+background-color:#8BDC90;
+margin: 1rem;
+text-align: center;
+font-size: 2rem;
+}
+
+
+.title {
+  width: 100%;
+  border-bottom: 1px solid #d8d8d8;
+  padding: .5em;
+  font-weight: bold;
+  text-align: center;
+  background-color: #1E9526;
+}
+
+.asideWrapper {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Page hide */
+
+.page {
+  width: 100%;
+  display: none;
+}
+
+.active {
+  width: 100%;
+  display: block;
+}
+
+.pageWrapper {
+  width: 80%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sectionWrapper {
+  width: 100%;
+  display: flex;
+}
+
+
+ .textContainer {
+   width: 100%;
+   height: 21.1em;
+   overflow: hidden;
+   padding: 0em;
+   margin: 1em 0em 0em 5em;
+   border: 1px solid #d8d8d8;
+   background-color: #8BDC90;
+   background-origin: border-box;
+}
+
+.textBox {
+   width: 100%;
+   border-bottom: 1px solid #d8d8d8;
+   padding: .5em;
+   display: flex;
+   flex-grow: 1;
+
+ }
+
+
+.userName {
+    color: #3C7ABB;
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  .userDetails {
+    width: 96%;
+  }
+
+  .date {
+    color: #888888;
+    margin-left: 1.5em;
+    font-size: .85em;
+    font-weight: 450;
+  }
+
+  .vote {
+    color: #888888;
+    margin-top: 1em;
+    width: 4%;
+   }
+
+
+.threeBox {
+  width: 100%;
+  margin: 0em;
+  padding: 0em;
+  display: flex;
+  margin-left: 5em;
+}
+
+.homeBox {
+  width:60%;
+  border: 1px solid #d8d8d8;
+  background-color: #1E9526;
+}
+
+.buttonBox {
+  width:20%;
+  border: 1px solid #d8d8d8;
+  background-color: #1E9526;
+}

@@ -1,0 +1,47 @@
+body{
+  margin:0;
+  height:100%;
+}
+.userBar{
+  width: 20%;
+  background-color: #1e9525;
+  display:inline-block;
+  height: 50em;
+}
+
+.initialVisit{
+  margin-top: 10%;
+  padding-left:10%;
+  display:none;
+
+}
+
+.initialVisit a:link{
+  font-size: .8em;
+  color: #8bdc91;
+  margin-right: 2%;
+  text-decoration:none;
+}
+.initialVisit a:hover{
+  color: #0B7712;
+  text-decoration:none;
+}
+.initialVisit a:visited{
+  text-decoration:none;
+}
+.loginData{
+  margin-top: 5%;
+}
+.imageOption{
+  width:30%;
+  margin-top:2%;
+  display:inline-block;
+}
+.userSubmit{
+  margin-top: 8%;
+}
+
+
+.active{
+  display:block;
+}

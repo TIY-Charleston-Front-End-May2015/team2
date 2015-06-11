@@ -15,6 +15,13 @@ body{
   display:none;
 
 }
+.returnUser{
+  display:none;
+
+}
+.newUser{
+  display:none;
+}
 
 .initialVisit a:link{
   font-size: .8em;
@@ -32,13 +39,34 @@ body{
 .loginData{
   margin-top: 5%;
 }
+.userName{
+  display:none;
+}
+.password{
+  display:none;
+}
+.verifyPassword{
+  display:none;
+}
+.pickImage{
+  display:none;
+}
 .imageOption{
   width:30%;
   margin-top:2%;
   display:inline-block;
 }
+.imageOption img:hover{
+  width: 300%;
+  height:300%;
+  display:block;
+}
 .userSubmit{
   margin-top: 8%;
+  display:none;
+}
+.userCreate{
+  display:none;
 }
 
 

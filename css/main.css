@@ -14,8 +14,8 @@ section {
 }
 
 /* Aside */
-input {
-  width: 96%;
+.loginData input {
+  width: 85%;
   height: 2.2em;
   margin: 1em;
   border-radius: 2px;
@@ -224,6 +224,7 @@ border-radius: 2px;
 }
 .initialVisit a:visited{
   text-decoration:none;
+  color: #8bdc91;
 }
 .loginData{
   margin-top: 5%;

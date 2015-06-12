@@ -2,6 +2,9 @@
 var templates = {};
 
 templates.message = [
+  "<% if(_id === '5579f02d998fae0300000185') { console.log('usernames');%>",
+
+ "<% } else { %>",
   "<div class='textWrap'>",
   "<div class='profImage'><img src='https://octodex.github.com/images/daftpunktocat-guy.gif'>",
   "<div></div>",
@@ -16,5 +19,6 @@ templates.message = [
   "</div>",
   "</article>",
   "</div>",
-  "</div>"
+  "</div>",
+  "<% } %>"
 ].join("");

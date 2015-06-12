@@ -89,8 +89,18 @@ var page = {
               url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/5579f02d998fae0300000185",
               method: 'GET',
               success: function (data) {
-                console.log("this is the login data: ", data);
-              },
+                      console.log("this is the login data: ", data);
+                      _.each(data, function(e, i){
+                        // console.log("this is event: ", e);
+                        // console.log("this is index: ", i);
+                        if(i === username){
+                          console.log("this username exists in memory: ", i);
+                          console.log("this is the data for that username: ", e);
+                          var arr= e.split(",");
+                          console.log(arr);
+                          }
+                        });
+                },
               error: function (err) {
 
               }

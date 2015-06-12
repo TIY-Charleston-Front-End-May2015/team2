@@ -7,6 +7,7 @@ var page = {
   url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat",
   yourUsername: "",
   yourImage: "",
+  yourPassword: "",
   selectedImage: "",
 
 
@@ -30,6 +31,7 @@ var page = {
     $('.userCreate').on('click', page.createAccount);
     $('.userSubmit').on('click', page.loginAccount);
     $('.pickImage').on('click', 'input[type=radio]', page.selectImage);
+    $('.logOut').on('click', page.logOut);
 
     $('.content').on('click', '.editMessage', function (e) {
       e.preventDefault();
@@ -53,6 +55,32 @@ var page = {
     selectImage: function(e){
       page.selectedImage= $(this).attr('value');
       // console.log("you selected an image ", page.selectedImage);
+
+    },
+
+    logOut: function(e){
+        console.log("you want to log out");
+        console.log(page.yourUsername);
+        var userAccount = page.yourUsername;
+        var user = {
+            isOnline: false,
+            pass: page.yourPassword,
+            image: page.yourImage,
+        };
+        var objectToSend = {};
+        objectToSend[userAccount] = user;
+
+        $.ajax({
+            url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+            method: 'PUT',
+            data: objectToSend,
+            success: function (data) {
+              },
+            error: function (err) {
+
+            }
+      });
+
 
     },
     userLogin: function(e){
@@ -102,13 +130,30 @@ var page = {
                                       $('#response').text('User is Already Logged On');
                                     }
                                     else{
-                                      console.log("logOn");
                                       page.yourUsername= username;
-                                      console.log("this is your username: ", page.yourUsername);
                                       page.yourImage= e.image;
-                                      console.log("this is your image: ", page.yourImage);
-                                    }
+                                      page.yourPassword = e.pass;
+                                      var userAccount = page.yourUsername;
+                                      var user = {
+                                          isOnline: true,
+                                          pass: page.yourPassword,
+                                          image: page.yourImage,
+                                      };
+                                      var objectToSend = {};
+                                      objectToSend[userAccount] = user;
+
+                                      $.ajax({
+                                          url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+                                          method: 'PUT',
+                                          data: objectToSend,
+                                          success: function (data) {
+                                            },
+                                          error: function (err) {
+
+                                          }
+                                      });
                                 }
+                            }
                             else{
                               console.log("you used this password: ", password);
                               $(".feedbackMessage").addClass('active');
@@ -164,6 +209,7 @@ var page = {
                console.log("success!!: ", data);
                page.yourUsername= userAccount;
                page.yourImage= page.selectedImage;
+               page.yourPassword= password;
                console.log("these are set for the page: ", page.yourUsername + page.yourImage);
                $(".feedbackMessage").removeClass('active');
                $('.returnUser').removeClass('active');

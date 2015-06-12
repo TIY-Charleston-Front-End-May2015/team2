@@ -249,6 +249,17 @@ border-radius: 2px;
 .loggedOn{
   display:none;
 }
+.loggedOn img{
+  width: 40%;
+  height: 4em;
+}
+.loggedOn h4{
+  display:inline-block;
+}
+.logOut{
+  margin-top: 5%;
+  display:none;
+}
 
 
 .active{

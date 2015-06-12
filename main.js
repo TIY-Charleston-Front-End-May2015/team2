@@ -9,7 +9,7 @@ var page = {
   yourImage: "",
   yourPassword: "",
   selectedImage: "",
-  exists: false,
+  exists: true,
 
 
   init: function (arguments) {
@@ -81,7 +81,20 @@ var page = {
 
             }
       });
-
+      page.yourUsername = "";
+      page.yourPassword = "";
+      page.yourImage = "";
+      $(".feedbackMessage").removeClass('active');
+      $('.returnUser').removeClass('active');
+      $('.newUser').addClass('active');
+      $('.userSubmit').addClass('active');
+      $('.loginData input').addClass('active');
+      $('.verifyPassword').removeClass('active');
+      $('.logOut').removeClass('active');
+      $('.loggedOn').removeClass('active');
+      $('.loggedOn img').attr("src", page.yourImage );
+      $('.loggedOn h4').text(page.yourUsername);
+      $('.loginData').reset();
 
     },
     userLogin: function(e){
@@ -154,6 +167,19 @@ var page = {
                                           }
                                       });
                                 }
+                                $(".feedbackMessage").removeClass('active');
+                                $('.returnUser').removeClass('active');
+                                $('.newUser').removeClass('active');
+                                $('.verifyPassword').removeClass('active');
+                                $('.pickImage').removeClass('active');
+                                $('.userCreate').removeClass('active');
+                                $('.userSubmit').removeClass('active');
+                                $('.loginData input').removeClass('active');
+                                $('.logOut').addClass('active');
+                                $('.loggedOn').addClass('active');
+                                $('.loggedOn img').attr("src", page.yourImage);
+                                $('.loggedOn h4').text(page.yourUsername);
+                                $('.loginData').reset();
                             }
                             else{
                               console.log("you used this password: ", password);
@@ -195,6 +221,7 @@ var page = {
     }
     else{
       var userAccount = $('.userName').val();
+      console.log("this is page exists: ", page.exists);
       $.ajax({
           url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
           method: 'GET',
@@ -203,14 +230,14 @@ var page = {
                   _.each(data, function(e, i){
                     if(i === userAccount){
                       console.log("this username already exists");
-                      page.exists = true;
+                      page.exists = false;
                       console.log("this is page.exists: ", page.exists)
 
                     }
                   });
                 }
         });
-        if(page.exists = false){
+        if(page.exists){
           console.log("it said this was false: " ,page.exists)
                     var user = {
                         isOnline: true,
@@ -237,6 +264,11 @@ var page = {
                        $('.userCreate').removeClass('active');
                        $('.userSubmit').removeClass('active');
                        $('.loginData input').removeClass('active');
+                       $('.logOut').addClass('active');
+                       $('.loggedOn').addClass('active');
+                       $('.loggedOn img').attr("src", page.yourImage);
+                       $('.loggedOn h4').text(page.yourUsername);
+                       $('.loginData').reset();
 
                      },
                      error: function (err) {
@@ -246,6 +278,7 @@ var page = {
         }
         else{
           console.log("cant create this account");
+          console.log("page exists");
         }
     }
   },

@@ -15,7 +15,9 @@ function search (searchWord) {
 
 var page = {
   url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat",
-
+  yourUserName: "trevor",
+  yourImage: "",
+  yourPassword: "",
 
   init: function (arguments) {
     page.initStyling();
@@ -38,9 +40,20 @@ var page = {
     $('.userCreate').on('click', page.createAccount);
     $('.userSubmit').on('click', page.loginAccount);
 
+
+    /// On click edit this post if you are the correct user //
+
     $('.content').on('click', '.editMessage', function (e) {
       e.preventDefault();
-      $(this).next().toggleClass('active');
+
+      if (page.yourUserName === "trevor") {
+        console.log("make some changes")
+      }else{
+        console.log("stop")
+      };
+      // if(globalUserName === $(.textBox).siblings(something).children('.theUserName')) {
+            $(this).next().toggleClass('active');
+      // }
     });
 
     $('.content').on('click', '.submitEdit', function (e) {
@@ -164,7 +177,9 @@ var page = {
       success: function (data) {
 
         page.addOne(data);
-        console.log("on success create a message: ", data);
+        console.log("successful message creation = ", data);
+        console.log("user:",page.yourUserName);
+        console.log("image:",page.yourImage);
       },
       error: function (err) {
         console.log("error on create message:", err);
@@ -173,6 +188,7 @@ var page = {
 
   },
   updateMessage: function (editedMessage, messageId) {
+
 
     $.ajax({
       url: page.url + '/' + messageId,
@@ -193,7 +209,7 @@ var page = {
       url: page.url + "/" + $(this).closest('article').data('id'),
       method: 'DELETE',
       success: function (data) {
-        console.log("this:",this);
+        console.log("this delete:",this);
         $('.content').html('');
         page.loadMessages();
 
@@ -206,8 +222,11 @@ var page = {
 
     var newMessage = {
       message: $('input[name="message"]').val(),
+      user: page.yourUserName,
+      image: page.yourImage
 
     };
+
     page.createMessage(newMessage);
 
     $('input, textarea').val("");

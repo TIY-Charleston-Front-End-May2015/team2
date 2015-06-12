@@ -56,6 +56,10 @@ var page = {
               method: 'GET',
               success: function (data) {
                 console.log("this is the login data: ", data);
+                _.each(data, function(e, i){
+                  console.log("this is event: ", e);
+                  console.log("this is index: ", i);
+                });
               },
               error: function (err) {
 

@@ -9,6 +9,7 @@ var page = {
   yourImage: "",
   yourPassword: "",
   selectedImage: "",
+  exists: false,
 
 
   init: function (arguments) {
@@ -193,38 +194,59 @@ var page = {
       console.log("password does not match");
     }
     else{
-            var userAccount = $('.userName').val();
-            var user = {
-                isOnline: true,
-                pass: password,
-                image: page.selectedImage
-            };
-            var objectToSend = {};
-            objectToSend[userAccount] = user;
+      var userAccount = $('.userName').val();
       $.ajax({
-             url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
-             method: 'PUT',
-             data: objectToSend,
-             success: function (data) {
-               console.log("success!!: ", data);
-               page.yourUsername= userAccount;
-               page.yourImage= page.selectedImage;
-               page.yourPassword= password;
-               console.log("these are set for the page: ", page.yourUsername + page.yourImage);
-               $(".feedbackMessage").removeClass('active');
-               $('.returnUser').removeClass('active');
-               $('.newUser').removeClass('active');
-               $('.verifyPassword').removeClass('active');
-               $('.pickImage').removeClass('active');
-               $('.userCreate').removeClass('active');
-               $('.userSubmit').removeClass('active');
-               $('.loginData input').removeClass('active');
+          url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+          method: 'GET',
+          success: function (data) {
+                  console.log("this is the login data: ", data);
+                  _.each(data, function(e, i){
+                    if(i === userAccount){
+                      console.log("this username already exists");
+                      page.exists = true;
+                      console.log("this is page.exists: ", page.exists)
 
-             },
-             error: function (err) {
-               console.log("error ", err);
-             }
-      });
+                    }
+                  });
+                }
+        });
+        if(page.exists = false){
+          console.log("it said this was false: " ,page.exists)
+                    var user = {
+                        isOnline: true,
+                        pass: password,
+                        image: page.selectedImage
+                    };
+                    var objectToSend = {};
+                    objectToSend[userAccount] = user;
+                $.ajax({
+                     url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+                     method: 'PUT',
+                     data: objectToSend,
+                     success: function (data) {
+                       console.log("success!!: ", data);
+                       page.yourUsername= userAccount;
+                       page.yourImage= page.selectedImage;
+                       page.yourPassword= password;
+                       console.log("these are set for the page: ", page.yourUsername + page.yourImage);
+                       $(".feedbackMessage").removeClass('active');
+                       $('.returnUser').removeClass('active');
+                       $('.newUser').removeClass('active');
+                       $('.verifyPassword').removeClass('active');
+                       $('.pickImage').removeClass('active');
+                       $('.userCreate').removeClass('active');
+                       $('.userSubmit').removeClass('active');
+                       $('.loginData input').removeClass('active');
+
+                     },
+                     error: function (err) {
+                       console.log("error ", err);
+                     }
+              });
+        }
+        else{
+          console.log("cant create this account");
+        }
     }
   },
   addOne: function (message) {

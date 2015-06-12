@@ -250,15 +250,17 @@ border-radius: 2px;
   display:inline-block;
 }
 .imageOption img:hover{
-  width: 300%;
-  height:300%;
-  display:block;
+  transform: scale(2);
 }
 .userSubmit{
   margin-top: 8%;
   display:none;
 }
 .userCreate{
+  margin-top: 15%;
+  display:none;
+}
+.feedbackMessage{
   display:none;
 }
 

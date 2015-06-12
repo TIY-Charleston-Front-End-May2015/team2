@@ -2,7 +2,7 @@
 var templates = {};
 
 templates.message = [
-  "<% if(_id === '5579f02d998fae0300000185') { console.log('usernames');%>",
+  "<% if(_id === '557b32324ef0f403000002a7') { console.log('usernames');%>",
 
  "<% } else { %>",
   "<div class='textWrap'>",

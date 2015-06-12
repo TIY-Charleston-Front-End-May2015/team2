@@ -1,7 +1,196 @@
 body{
-  margin:0;
-  height:100%;
+
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
+
+section {
+  width: 80%;
+  height: 50em;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+/* Aside */
+.loginData input {
+  width: 85%;
+  height: 2.2em;
+  margin: 1em;
+  border-radius: 2px;
+  text-decoration: none;
+  border: 1px solid #d8d8d8;
+  display: flex;
+  font-size: .9em;
+}
+
+
+.page {
+  display: none;
+
+}
+.editing {
+display: none;
+margin-left: 5em;
+}
+
+.active {
+  display: block;
+}
+
+.border {
+border: 1px solid black;
+}
+
+.title {
+  width: 100%;
+  padding: 1em;
+  font-weight: bold;
+  text-align: center;
+  background-color: #272B33;
+  color: white;
+  display: flex;
+}
+
+/* Top Buttons */
+
+.burger {
+  width: 39%;
+  display: flex;
+  font-size: 2rem;
+}
+
+.theText {
+  width: 57%;
+  display: flex;
+  font-size: 2rem;
+}
+
+.search {
+  width: 4%;
+  display: flex;
+  font-size: 2rem;
+}
+
+.chatRoom {
+  border-left: 8px solid #272B33;
+  border-right: 8px solid #272B33;
+  padding: 1em;
+  height: 42.1em;
+  overflow: hidden;
+  background-origin: border-box;
+}
+
+
+
+/* Buttons */
+
+ .pageWrapper {
+  width: 100%;
+  margin: 0em;
+  padding: 0em;
+  display: inline-block;
+}
+
+.sendButton {
+margin: 1rem;
+text-align: center;
+font-size: 2rem;
+background-color:#1E9526;
+border: 1px solid white;
+color: white;
+border-radius: 2px;
+}
+
+.deleteButton {
+background-color:#1E9526;
+color: white;
+font-size: 1.5rem;
+padding: .5rem;
+border-radius: 2px;
+}
+
+
+
+.pageWrapper {
+  width: 100%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sectionWrapper {
+  width: 100%;
+  display: flex;
+}
+
+.profImage {
+  display: flex;
+  width: 20%;
+  border: 1px solid #272B33;
+  margin: 1rem;
+  height: 10.5rem;
+}
+
+.textBox {
+   width: 80%;
+   border: 1px solid #272B33;
+   margin: 1rem;
+   padding: .5em;
+   display: flex;
+   height: 10.5rem;
+ }
+
+ .textWrap {
+   width: 100%;
+   display: flex;
+ }
+
+
+.userName {
+    color: #3C7ABB;
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  .userDetails {
+    width: 96%;
+  }
+
+  .date {
+    color: #888888;
+    margin-left: 1.5em;
+    font-size: .85em;
+    font-weight: 450;
+  }
+
+  .vote {
+    color: #888888;
+    margin-top: 1em;
+    width: 4%;
+   }
+
+
+.threeBox {
+  width: 100%;
+  margin: 0em;
+  padding: 0em;
+  display: flex;
+}
+
+.homeBox {
+  width:60%;
+  border: 1px solid #232B32;
+  background-color: #272B33;
+}
+
+.buttonBox {
+  width:20%;
+  border: 1px solid #232B32;
+  background-color: #272B33;
+}
+
 .userBar{
   width: 20%;
   background-color: #1e9525;
@@ -35,6 +224,7 @@ body{
 }
 .initialVisit a:visited{
   text-decoration:none;
+  color: #8bdc91;
 }
 .loginData{
   margin-top: 5%;

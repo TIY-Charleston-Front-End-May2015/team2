@@ -2,50 +2,73 @@ $(document).ready(function () {
   page.init();
 });
 
-var page = {
 
+var page = {
   url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat",
-  init: function () {
+
+
+  init: function (arguments) {
     page.initStyling();
     page.initEvents();
   },
-  initStyling: function () {
 
-    // page.loadItems();
+  initStyling: function (arguments) {
+
+    page.loadMessages();
 
   },
+
   initEvents: function () {
 
+    $('.content').on('click', '.delete', page.deleteMessage);
+    $('.sendButton').on('click', page.addMessage);
     $('.newUser').on('click', page.createLogin);
     $('.returnUser').on('click', page.userLogin);
     $('.userCreate').on('click', page.createAccount);
     $('.userSubmit').on('click', page.loginAccount);
 
-  },
+    $('.content').on('click', '.editMessage', function (e) {
+      e.preventDefault();
+      $(this).next().toggleClass('active');
+    });
 
-  userLogin: function(e){
-    e.preventDefault();
-    console.log("this is an existing user");
-    $('.returnUser').removeClass('active');
-    $('.newUser').addClass('active');
-    $('.verifyPassword').removeClass('active');
-    $('.pickImage').removeClass('active');
-    $('.userCreate').removeClass('active');
-    $('.userSubmit').addClass('active');
-  },
+    $('.content').on('click', '.submitEdit', function (e) {
+      e.preventDefault();
+      var $thisEditing = $(this).closest('.editing');
+      var messageId = $(this).closest('article').data('id');
+      var updatedMessage = {
+        message: $thisEditing.find('.editMessage').val(),
+      };
+      console.log("the updated message:",updatedMessage)
+      page.updateMessage(updatedMessage, messageId);
 
-  createLogin: function(e){
-    e.preventDefault();
-    console.log("this is a new user");
-    $('.returnUser').addClass('active');
-    $('.newUser').removeClass('active');
-    $('.verifyPassword').addClass('active');
-    $('.pickImage').addClass('active');
-    $('.userCreate').addClass('active');
-    $('.userSubmit').removeClass('active');
-  },
 
-  loginAccount: function(){
+    });
+
+},
+    userLogin: function(e){
+      e.preventDefault();
+      console.log("this is an existing user");
+      $('.returnUser').removeClass('active');
+      $('.newUser').addClass('active');
+      $('.verifyPassword').removeClass('active');
+      $('.pickImage').removeClass('active');
+      $('.userCreate').removeClass('active');
+      $('.userSubmit').addClass('active');
+    },
+
+    createLogin: function(e){
+      e.preventDefault();
+      console.log("this is a new user");
+      $('.returnUser').addClass('active');
+      $('.newUser').removeClass('active');
+      $('.verifyPassword').addClass('active');
+      $('.pickImage').addClass('active');
+      $('.userCreate').addClass('active');
+      $('.userSubmit').removeClass('active');
+    },
+
+    loginAccount: function(){
     var username= $('.userName').val();
     var password= $('.password').val();
     console.log("username: ", username);
@@ -55,19 +78,25 @@ var page = {
               url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/5579f02d998fae0300000185",
               method: 'GET',
               success: function (data) {
-                console.log("this is the login data: ", data);
-                _.each(data, function(e, i){
-                  console.log("this is event: ", e);
-                  console.log("this is index: ", i);
-                });
-              },
+                      console.log("this is the login data: ", data);
+                      _.each(data, function(e, i){
+                        // console.log("this is event: ", e);
+                        // console.log("this is index: ", i);
+                        if(i === username){
+                          console.log("this username exists in memory: ", i);
+                          console.log("this is the data for that username: ", e);
+                          var arr= e.split(",");
+                          console.log(arr);
+                          }
+                        });
+                },
               error: function (err) {
 
               }
         });
     }
     else if(username !=="" && password == ""){
-      console.log("please enser password");
+      console.log("please enter password");
     }
     else if(username =="" && password !== ""){
       console.log("please enter username");
@@ -76,7 +105,6 @@ var page = {
       console.log("please enter user name and password");
     }
   },
-
   createAccount: function(e){
     console.log("decided to create account");
     console.log($('.userName').val());
@@ -91,12 +119,102 @@ var page = {
     }
 
   },
+  addOne: function (message) {
+    page.loadTemplate("message", message, $('.chat > .content'));
+    console.log("one message to the dom:",message);
+  },
+  addAll: function (messageCollection) {
+    _.each(messageCollection, page.addOne);
+    console.log("message collection:",messageCollection)
+  },
+
+  loadMessages: function () {
+
+    $.ajax({
+      url: page.url,
+      method: 'GET',
+      success: function (data) {
+        console.log("load messages data:",data);
+        page.addAll(data);
+      },
+      error: function (err) {
+        console.log("error on load messages:", err);
+      }
+    });
 
 
+},
+  createMessage: function (newMessage) {
 
+    $.ajax({
+      url: page.url,
+      method: 'POST',
+      data: newMessage,
+      success: function (data) {
+
+        page.addOne(data);
+        console.log("on success create a message: ", data);
+      },
+      error: function (err) {
+        console.log("error on create message:", err);
+      }
+    });
+
+  },
+  updateMessage: function (editedMessage, messageId) {
+
+    $.ajax({
+      url: page.url + '/' + messageId,
+      method: 'PUT',
+      data: editedMessage,
+      success: function (data) {
+        $('.content').html('');
+        page.loadMessages();
+
+      },
+      error: function (err) {}
+    });
+  },
+  deleteMessage: function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: page.url + "/" + $(this).closest('article').data('id'),
+      method: 'DELETE',
+      success: function (data) {
+        console.log("this:",this);
+        $('.content').html('');
+        page.loadMessages();
+
+      }
+    });
+  },
+
+  addMessage: function (event) {
+    event.preventDefault();
+
+    var newMessage = {
+      message: $('input[name="message"]').val(),
+
+    };
+    page.createMessage(newMessage);
+
+    $('input, textarea').val("");
+  },
+
+
+  loadTemplate: function (tmplName, data, $target) {
+    var compiledTmpl = _.template(page.getTemplate(tmplName));
+
+    $target.append(compiledTmpl(data));
+  },
+
+
+  getTemplate: function (name) {
+    return templates[name];
+  }
 
 };
-
 
 /////////////////////////////////////////////////////////////////////////////////
 // Used the below code to create the first user account and have a static _id for user accounts

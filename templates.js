@@ -1,34 +1,18 @@
 
-var messages = [
-
-  {
-    title: "Tiffany",
-    date: "Today"
-
-  },
-  {
-    username: "Trevor",
-    date: "Today"
-  },
-
-]
-
-
 var templates = {};
 
 templates.message = [
-
-"<div class='textContainer'>",
-"<div class='title'>The chat block <span class='search'><i class='fa fa-search'></i></span></div>",
-"<div class='textBox'>",
-"<div class='userDetails'>",
-"<span class='userName'><%= username %></span>",
-"<div class='date'><%= date %></div>",
-"</div>",
-"<div class='vote'>",
-"<span>vote up down?</span>",
-"</div>",
-"</div>",
-"</div>"
-
+  "<div class='textWrap'>",
+  "<div class='profImage'><img src='http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png' alt='...' class='img-circle'></div>",
+  "<div class='textBox'>",
+  "<article class='message' data-id='<%= _id %>'>",
+  "<h3><%= message %></h3>",
+  "<a href='' class='delete deleteButton'>delete</a> | <a href='' class='editMessage'>edit</a>",
+  "<div class='editing'>",
+  "<input type='text' class='editMessage' value='<%= message %>'>",
+  "<div class='submitEdit deleteButton'>Update</div>",
+  "</div>",
+  "</article>",
+  "</div>",
+  "</div>"
 ].join("");

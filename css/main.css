@@ -14,14 +14,14 @@ section {
 }
 
 /* Aside */
-.loginData input {
+.userName, .password, .verifyPassword {
   width: 85%;
   height: 2.2em;
   margin: 1em;
   border-radius: 2px;
   text-decoration: none;
   border: 1px solid #d8d8d8;
-  display: flex;
+  display: none;
   font-size: .9em;
 }
 
@@ -152,12 +152,6 @@ border-radius: 2px;
  }
 
 
-.userName {
-    color: #3C7ABB;
-    font-weight: bold;
-    font-size: 1em;
-  }
-
   .userDetails {
     width: 96%;
   }
@@ -248,18 +242,7 @@ border-radius: 2px;
 .loginData{
   margin-top: 5%;
 }
-.userName{
-  display:none;
-  width: 80%;
-}
-.password{
-  display:none;
-  width: 80%;
-}
-.verifyPassword{
-  display:none;
-  width:80%;
-}
+
 .pickImage{
   display:none;
 }
@@ -269,15 +252,20 @@ border-radius: 2px;
   display:inline-block;
 }
 .imageOption img:hover{
-  width: 300%;
-  height:300%;
-  display:block;
+  transform: scale(2);
 }
 .userSubmit{
   margin-top: 8%;
   display:none;
 }
 .userCreate{
+  margin-top: 15%;
+  display:none;
+}
+.feedbackMessage{
+  display:none;
+}
+.loggedOn{
   display:none;
 }
 

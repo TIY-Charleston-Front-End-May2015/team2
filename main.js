@@ -2,6 +2,16 @@ $(document).ready(function () {
   page.init();
 });
 
+function search (searchWord) {
+  //split up searchWord.toLowerCase
+  //if they type shake, and you want to return shakespeare
+  //   [s,h,a,k,e] !== [s,h,a,k,e,s,p,e,a,r,e,]
+ //   searchLength = search.length;
+  //   check only the characters in the database (in messages), up to
+  //   searchLength
+  //  [s,h,a,k,e] === [s,h,a,k,e,s,p,e,a,r,e,].slice(0,searchLength)
+}
+
 
 var page = {
   url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat",
@@ -21,7 +31,8 @@ var page = {
   initEvents: function () {
 
     $('.content').on('click', '.delete', page.deleteMessage);
-    $('.sendButton').on('click', page.addMessage);
+    $('.clickAway').on('click', page.addMessage);
+    $('.enterAway').on('submit', page.addMessage);
     $('.newUser').on('click', page.createLogin);
     $('.returnUser').on('click', page.userLogin);
     $('.userCreate').on('click', page.createAccount);

@@ -1,0 +1,21 @@
+{
+  "name": "team2",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Glasser88/team2",
+  "authors": [
+    "Trevor Glass <glasser1988@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "jquery": "~2.1.4",
+    "underscore": "~1.8.3"
+  }
+}

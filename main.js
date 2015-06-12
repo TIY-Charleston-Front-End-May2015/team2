@@ -165,6 +165,15 @@ var page = {
                page.yourUsername= userAccount;
                page.yourImage= page.selectedImage;
                console.log("these are set for the page: ", page.yourUsername + page.yourImage);
+               $(".feedbackMessage").removeClass('active');
+               $('.returnUser').removeClass('active');
+               $('.newUser').removeClass('active');
+               $('.verifyPassword').removeClass('active');
+               $('.pickImage').removeClass('active');
+               $('.userCreate').removeClass('active');
+               $('.userSubmit').removeClass('active');
+               $('.loginData input').removeClass('active');
+
              },
              error: function (err) {
                console.log("error ", err);
@@ -268,19 +277,3 @@ var page = {
   }
 
 };
-
-/////////////////////////////////////////////////////////////////////////////////
-// Used the below code to create the first user account and have a static _id for user accounts
-// This user _id to access user account information is "_id": "5579f02d998fae0300000185"
-// $.ajax({
-//       url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7" ,
-//       method: 'POST',
-//       data: {trossy: "{true, 'Athena12', 'https://octodex.github.com/images/momtocat.png'}"},
-//       success: function (data) {
-//         console.log("success!!: ", data);
-//       },
-//       error: function (err) {
-//         console.log("error ", err);
-//       }
-//     });
-///////////////////////////////////////////////////////////////////////////////

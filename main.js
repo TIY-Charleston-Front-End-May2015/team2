@@ -94,8 +94,6 @@ var page = {
       $('.loggedOn').removeClass('active');
       $('.loggedOn img').attr("src", page.yourImage );
       $('.loggedOn h4').text(page.yourUsername);
-      $('.loginData').reset();
-
     },
     userLogin: function(e){
       e.preventDefault();
@@ -138,7 +136,7 @@ var page = {
                           console.log("this is the info: ", e);
 
                             if(e.pass === password){
-                                    console.log("you selected the correct password");
+                                    console.log("you selected the correct password " ,e.isOnline);
                                     if(e.isOnline === "true"){
                                       $(".feedbackMessage").addClass('active');
                                       $('#response').text('User is Already Logged On');
@@ -147,6 +145,8 @@ var page = {
                                       page.yourUsername= username;
                                       page.yourImage= e.image;
                                       page.yourPassword = e.pass;
+                                      console.log("your image: ", page.yourImage);
+                                      console.log("your username: ", page.yourUsername);
                                       var userAccount = page.yourUsername;
                                       var user = {
                                           isOnline: true,
@@ -166,20 +166,20 @@ var page = {
 
                                           }
                                       });
+                                      $(".feedbackMessage").removeClass('active');
+                                      $('.returnUser').removeClass('active');
+                                      $('.newUser').removeClass('active');
+                                      $('.verifyPassword').removeClass('active');
+                                      $('.pickImage').removeClass('active');
+                                      $('.userCreate').removeClass('active');
+                                      $('.userSubmit').removeClass('active');
+                                      $('.loginData input').removeClass('active');
+                                      $('.logOut').addClass('active');
+                                      $('.loggedOn').addClass('active');
+                                      $('.loggedOn img').attr("src", page.yourImage);
+                                      $('.loggedOn h4').text(page.yourUsername);
                                 }
-                                $(".feedbackMessage").removeClass('active');
-                                $('.returnUser').removeClass('active');
-                                $('.newUser').removeClass('active');
-                                $('.verifyPassword').removeClass('active');
-                                $('.pickImage').removeClass('active');
-                                $('.userCreate').removeClass('active');
-                                $('.userSubmit').removeClass('active');
-                                $('.loginData input').removeClass('active');
-                                $('.logOut').addClass('active');
-                                $('.loggedOn').addClass('active');
-                                $('.loggedOn img').attr("src", page.yourImage);
-                                $('.loggedOn h4').text(page.yourUsername);
-                                $('.loginData').reset();
+
                             }
                             else{
                               console.log("you used this password: ", password);

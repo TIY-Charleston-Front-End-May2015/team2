@@ -21,6 +21,7 @@ var page = {
   selectedImage: "",
   exists: true,
 
+
   init: function (arguments) {
     page.initStyling();
     page.initEvents();

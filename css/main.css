@@ -54,26 +54,14 @@ background-size: cover;
   font-family: copperplate;
   z-index: 1;
   list-style: none;
+  background-color: grey;
+  border: 2px solid black;
+  box-shadow: 0em 0.1em 0.1em #000000;
 }
 
 .heroTitle:hover {
   text-decoration: none;
 }
-
-.heroBox {
-  position: fixed;
-  height: 50em;
-  width: 50em;
-  background: -moz-linear-gradient(top,  rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.72) 93%, rgba(255,255,255,0.72) 99%); FF3.6+
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.72)), color-stop(93%,rgba(255,255,255,0.72)), color-stop(99%,rgba(255,255,255,0.72))); Chrome,Safari4+
-  background: -webkit-linear-gradient(top,  rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 93%,rgba(255,255,255,0.72) 99%); Chrome10+,Safari5.1+
-  background: -o-linear-gradient(top,  rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 93%,rgba(255,255,255,0.72) 99%); Opera 11.10+
-  background: -ms-linear-gradient(top,  rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 93%,rgba(255,255,255,0.72) 99%); IE10+
-  background: linear-gradient(to bottom,  rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 93%,rgba(255,255,255,0.72) 99%); W3C
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8ffffff', endColorstr='#b8ffffff',GradientType=0 ); IE6-9
-}
-
-
 
 /* Aside */
 .userName, .password, .verifyPassword {

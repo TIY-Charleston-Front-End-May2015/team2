@@ -20,6 +20,7 @@ var page = {
   yourPassword: "",
   selectedImage: "",
   exists: true,
+  totalMessages: 0,
 
 
   init: function (arguments) {
@@ -53,8 +54,31 @@ var page = {
           }
       });
 
+      setInterval(function(){
+        $.ajax({
+        url: page.url,
+        method: 'GET',
+        success: function (data) {
 
-    },
+          var checkLength = data.length;
+          console.log("length:",data.length);
+          console.log("load messages data:",data);
+          if(page.totalMessages !== checkLength) {
+            $('.chat > .content').empty()
+            page.addAll(data);
+          }else {
+            console.log("no new messages");
+          }
+
+        },
+        error: function (err) {
+          console.log("error on load messages:", err);
+        }
+      });
+
+    }, 3000);
+
+},
 
     selectImage: function(e){
       page.selectedImage= $(this).attr('value');
@@ -303,10 +327,12 @@ var page = {
 
   loadMessages: function () {
 
-    $.ajax({
+      $.ajax({
       url: page.url,
       method: 'GET',
       success: function (data) {
+        page.totalMessages = data.length;
+        console.log("length:",data.length);
         console.log("load messages data:",data);
         page.addAll(data);
       },
@@ -326,6 +352,7 @@ var page = {
       success: function (data) {
 
         page.addOne(data);
+        page.totalMessages = data.length;
         console.log("successful message creation = ", data);
         console.log("user:",page.yourUserName);
         console.log("image:",page.yourImage);
@@ -341,17 +368,17 @@ var page = {
 
   e.preventDefault();
 
-  if (page.yourUserName === "trevor") {
-    console.log("make some changes")
-  }else{
-    console.log("stop")
+
+  var check = $(this).attr("name")
+  console.log("check value:",check)
+
+  if(check === page.yourUsername) {
+    console.log("you can edit")
+    $(this).next().toggleClass('active');
+  }else {
+    console.log("you cant edit")
   };
-  // if(globalUserName === $(.textBox).siblings(something).children('.theUserName')) {
 
-        $(this).next().toggleClass('active');
-
-
-  // }
 },
 
   submitTheEdit: function (e) {
@@ -386,16 +413,26 @@ var page = {
   deleteMessage: function(e) {
     e.preventDefault();
 
-    $.ajax({
-      url: page.url + "/" + $(this).closest('article').data('id'),
-      method: 'DELETE',
-      success: function (data) {
-        console.log("this delete:",this);
-        $('.content').html('');
-        page.loadMessages();
+    var check = $(this).attr("name")
+    console.log("check value:",check)
 
-      }
-    });
+    if(check === page.yourUsername) {
+      console.log("you can delete")
+      $.ajax({
+        url: page.url + "/" + $(this).closest('article').data('id'),
+        method: 'DELETE',
+        success: function (data) {
+          console.log("this delete:",this);
+          $('.content').html('');
+          page.loadMessages();
+
+        }
+      });
+    }else {
+      console.log("you cant delete")
+    };
+
+
   },
 
   addMessage: function (event) {

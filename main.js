@@ -44,42 +44,17 @@ var page = {
     $('.userSubmit').on('click', page.loginAccount);
     $('.pickImage').on('click', 'input[type=radio]', page.selectImage);
     $('.logOut').on('click', page.logOut);
+    $('.content').on('click','.editMessage', page.checkIfUserCanEdit);
+    $('.content').on('click', '.submitEdit', page.submitTheEdit);
 
+    },
 
-    /// On click edit this post if you are the correct user //
-
-    $('.content').on('click', '.editMessage', function (e) {
-      e.preventDefault();
-
-      if (page.yourUserName === "trevor") {
-        console.log("make some changes")
-      }else{
-        console.log("stop")
-      };
-      // if(globalUserName === $(.textBox).siblings(something).children('.theUserName')) {
-            $(this).next().toggleClass('active');
-      // }
-    });
-
-    $('.content').on('click', '.submitEdit', function (e) {
-      e.preventDefault();
-      var $thisEditing = $(this).closest('.editing');
-      var messageId = $(this).closest('article').data('id');
-      var updatedMessage = {
-        message: $thisEditing.find('.editMessage').val(),
-      };
-      console.log("the updated message:",updatedMessage)
-      page.updateMessage(updatedMessage, messageId);
-
-
-    });
-
-},
     selectImage: function(e){
       page.selectedImage= $(this).attr('value');
       // console.log("you selected an image ", page.selectedImage);
 
     },
+
 
     logOut: function(e){
         console.log("you want to log out");
@@ -348,8 +323,40 @@ var page = {
     });
 
   },
-  updateMessage: function (editedMessage, messageId) {
 
+  checkIfUserCanEdit: function (e) {
+
+  e.preventDefault();
+
+  if (page.yourUserName === "trevor") {
+    console.log("make some changes")
+  }else{
+    console.log("stop")
+  };
+  // if(globalUserName === $(.textBox).siblings(something).children('.theUserName')) {
+
+        //******DONT DELETE *****/
+        $(this).next().toggleClass('active');
+
+
+  // }
+},
+
+  submitTheEdit: function (e) {
+
+    e.preventDefault();
+      console.log("submit the edit");
+          var $thisEditing = $(this).closest('.editing');
+          var messageId = $(this).closest('article').data('id');
+          var updatedMessage = {
+          message: $thisEditing.find('.editMessage').val(),
+        };
+      console.log("the updated message:",updatedMessage)
+      page.updateMessage(updatedMessage, messageId);
+  },
+
+
+  updateMessage: function (editedMessage, messageId) {
 
     $.ajax({
       url: page.url + '/' + messageId,
@@ -363,6 +370,7 @@ var page = {
       error: function (err) {}
     });
   },
+
   deleteMessage: function(e) {
     e.preventDefault();
 
@@ -381,9 +389,22 @@ var page = {
   addMessage: function (event) {
     event.preventDefault();
 
-    var newMessage = {
+    $.ajax({
+       url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+       method: 'GET',
+       success: function (data) {
+               console.log("this is the login data: ", data);
+               _.each(data, function(e, i){
+                       console.log("user name: ", i);
+                 }
+               });
+             }
+     });
+
+
+      var newMessage = {
       message: $('input[name="message"]').val(),
-      user: page.yourUserName,
+      user: page.yourUsername,
       image: page.yourImage
 
     };

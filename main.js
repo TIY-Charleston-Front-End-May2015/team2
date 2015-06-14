@@ -128,6 +128,8 @@ var page = {
       $('.loggedOn').removeClass('active');
       $('.loggedOn img').attr("src", page.yourImage );
       $('.loggedOn h4').text(page.yourUsername);
+      $('.chat').removeClass('active');
+      $('.chat').addClass('page');
     },
     userLogin: function(e){
       e.preventDefault();
@@ -212,6 +214,8 @@ var page = {
                                       $('.loggedOn').addClass('active');
                                       $('.loggedOn img').attr("src", page.yourImage);
                                       $('.loggedOn h4').text(page.yourUsername);
+                                      $('.chat').removeClass('page');
+                                      $('.chat').addClass('active');
                                 }
 
                             }
@@ -302,7 +306,9 @@ var page = {
                        $('.loggedOn').addClass('active');
                        $('.loggedOn img').attr("src", page.yourImage);
                        $('.loggedOn h4').text(page.yourUsername);
-                       $('.loginData').reset();
+                       $('.chat').removeClass('page');
+                       $('.chat').addClass('active');
+                      //  $('.loginData').reset();
 
                      },
                      error: function (err) {

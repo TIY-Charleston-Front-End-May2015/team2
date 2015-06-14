@@ -22,3 +22,11 @@ templates.message = [
  "</div>",
  "<% } %>"
 ].join("");
+
+templates.Online = [
+  "<% if(Status === 'true') { %>",
+  "<div class= 'person'><img class ='personOnline' src=' <%= image %>' width='35' ><h6 class='WhoIsUser'><%= username %></h6> ",
+  "<% } else { %>",
+  "<div class= 'person'><img class ='personOffline' src=' <%= image %>' width='30' ><h6 class='WhoIsUser'><%= username %></h6> ",
+  "<% } %>"
+].join("");

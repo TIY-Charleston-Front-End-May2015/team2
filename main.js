@@ -21,6 +21,10 @@ var page = {
   selectedImage: "",
   exists: true,
   totalMessages: 0,
+  totalPeople: 0,
+  totalOnline: 0,
+  totalOffline: 0,
+
 
 
   init: function (arguments) {
@@ -78,6 +82,37 @@ var page = {
 
     }, 3000);
 
+    setInterval(function(){
+          $.ajax({
+          url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+          method: 'GET',
+          success: function (data) {
+            var online = 0;
+            var offline = 0;
+            _.each(data,function(e, i){
+              if(i === "_id"){console.log("this is the id");}
+              else{
+                  if(e.isOnline === 'true'){
+                    online +=1;
+                  }
+                  else{
+                  offline +=1;
+                  }
+            }
+            });
+
+            if(page.totalOnline !== online || page.totalOffline !== offline){
+              $('.whosOnline').empty();
+              page.loadPeople();
+            }
+            // console.log("these may people recorded online: ", page.totalOnline);
+            // console.log("these many people recorded Offline: ", page.totalOffline);
+            // console.log("these may people online: ", online);
+            // console.log("these many people Offline: ", offline);
+          }
+        });
+      }, 2000);
+
 },
 
     selectImage: function(e){
@@ -130,6 +165,8 @@ var page = {
       $('.loggedOn h4').text(page.yourUsername);
       $('.chat').removeClass('active');
       $('.chat').addClass('page');
+      $('.whosOnline').removeClass('active');
+      $('.whosOnline').empty();
     },
     userLogin: function(e){
       e.preventDefault();
@@ -216,6 +253,8 @@ var page = {
                                       $('.loggedOn h4').text(page.yourUsername);
                                       $('.chat').removeClass('page');
                                       $('.chat').addClass('active');
+                                      $('.whosOnline').addClass('active');
+                                      page.loadPeople();
                                 }
 
                             }
@@ -308,7 +347,9 @@ var page = {
                        $('.loggedOn h4').text(page.yourUsername);
                        $('.chat').removeClass('page');
                        $('.chat').addClass('active');
-                      //  $('.loginData').reset();
+                       $('.whosOnline').addClass('active');
+                       page.loadPeople();
+                       $('.loginData').reset();
 
                      },
                      error: function (err) {
@@ -443,20 +484,6 @@ var page = {
 
   addMessage: function (event) {
     event.preventDefault();
-
-    // $.ajax({
-    //    url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
-    //    method: 'GET',
-    //    success: function (data) {
-    //            console.log("this is the login data: ", data);
-    //            _.each(data, function(e, i){
-    //                    console.log("user name: ", i);
-    //              }
-    //            });
-    //          }
-    //  });
-
-
       var newMessage = {
       message: $('input[name="message"]').val(),
       user: page.yourUsername,
@@ -469,10 +496,48 @@ var page = {
     $('input, textarea').val("");
   },
 
+  addOnePerson: function (data) {
+    console.log("this is the login: ", data);
+    page.loadTemplate("Online", data, $('.whosOnline'));
+  },
+  addAllPeople: function (allPeople) {
+    page.totalOnline = 0;
+    page.totalOffline = 0;
+    console.log("this is what we are passing: ", allPeople);
+    _.each(allPeople,function(e, i){
+      if(i === "_id"){console.log("this is the id");}
+      else{
+        if(e.isOnline === 'true'){
+          page.totalOnline +=1;
+        }
+        else{ //this will also log the _id variable, but thats fine.
+          page.totalOffline +=1;
+        }
+
+      var personArray = {username: i, Status: e.isOnline, image: e.image};
+      page.addOnePerson(personArray);
+      }
+    });
+  },
+
+  loadPeople: function () {
+
+      $.ajax({
+      url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+      method: 'GET',
+      success: function (data) {
+        page.totalPeople = data.length;
+        console.log("load people data:",data);
+        page.addAllPeople(data);
+      },
+      error: function (err) {
+        console.log("error on load messages:", err);
+      }
+    });
+  },
 
   loadTemplate: function (tmplName, data, $target) {
     var compiledTmpl = _.template(page.getTemplate(tmplName));
-
     $target.append(compiledTmpl(data));
   },
 
@@ -480,5 +545,6 @@ var page = {
   getTemplate: function (name) {
     return templates[name];
   }
+
 
 };

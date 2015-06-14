@@ -1,16 +1,66 @@
 body{
-
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 2em;
+  background-color: grey;
 }
 
 section {
   width: 80%;
-  height: 50em;
+  height: 40em;
   margin: 0;
   padding: 0;
-  display: inline-block;
+}
+
+.userBar{
+  width: 20%;
+  background-color: #1e9525;
+  display:inline-block;
+  height: 30em;
+}
+
+video#bgvid {
+position: fixed;
+top: 50%;
+left: 50%;
+padding: 0px;
+margin: 0px;
+min-width: 100%;
+min-height: 100%;
+width: auto;
+height: auto;
+z-index: -100;
+-webkit-transform: translateX(-50%) translateY(-50%);
+transform: translateX(-50%) translateY(-50%);
+background: url("http://cobblehilldigital.com/wp-content/themes/cobblehill/videos/cobble-hill-video.mp4") no-repeat;
+background-size: cover;
+}
+
+.heroButton {
+  position: fixed;
+  border: 2px solid black;
+  top: 30%;
+  left: 37%;
+  padding: .5em;
+  font-size: 2em;
+  font-family: copperplate;
+}
+
+ .heroTitle {
+  position: fixed;
+  top: 25%;
+  left: 20%;
+  font-size: 6em;
+  font-family: copperplate;
+  z-index: 1;
+  list-style: none;
+  background-color: grey;
+  border: 2px solid black;
+  box-shadow: 0em 0.1em 0.1em #000000;
+}
+
+.heroTitle:hover {
+  text-decoration: none;
 }
 
 /* Aside */
@@ -24,7 +74,6 @@ section {
   display: none;
   font-size: .9em;
 }
-
 
 .page {
   display: none;
@@ -77,9 +126,10 @@ border: 1px solid black;
   border-left: 8px solid #272B33;
   border-right: 8px solid #272B33;
   padding: 1em;
-  height: 42.1em;
-  overflow: hidden;
+  height: 36.3em;
+  overflow: scroll;
   background-origin: border-box;
+  background-color: white;
 }
 
 
@@ -111,8 +161,6 @@ padding: .5rem;
 border-radius: 2px;
 }
 
-
-
 .pageWrapper {
   width: 100%;
   display: flex;
@@ -120,17 +168,24 @@ border-radius: 2px;
   margin-right: auto;
 }
 
-.sectionWrapper {
-  width: 100%;
-  display: flex;
-}
-
 .profImage {
   display: flex;
+  width: 100%;
+  height: 8.5rem;
+}
+
+.profImageWrap {
   width: 20%;
   border: 1px solid #272B33;
-  margin: 1rem;
-  height: 10.5rem;
+  text-align: center;
+  height: 8.5rem;
+  margin-top: 1rem;
+  box-sizing: border-box;
+}
+
+.theUserName {
+  border: 1px solid #272B33;
+  box-sizing: border-box;
 }
 
 .textBox {
@@ -166,6 +221,8 @@ border-radius: 2px;
    }
 
 
+/* Bottom section of the message input */
+
 .threeBox {
   width: 100%;
   margin: 0em;
@@ -179,17 +236,30 @@ border-radius: 2px;
   background-color: #272B33;
 }
 
+.messageInput {
+  width: 96%;
+  height: 2.3em;
+  margin: .8em;
+  border-radius: 2px;
+  text-decoration: none;
+  border: 1px solid #d8d8d8;
+  display: flex;
+  font-size: .9em;
+}
+
 .buttonBox {
   width:20%;
   border: 1px solid #232B32;
   background-color: #272B33;
 }
 
+/* Start of the aside section */
+
 .userBar{
   width: 20%;
-  background-color: #1e9525;
+  background-color: #00943A;
   display:inline-block;
-  height: 50em;
+  height: 44em;
 }
 
 .initialVisit{
@@ -238,6 +308,10 @@ border-radius: 2px;
 .userSubmit{
   margin-top: 8%;
   display:none;
+  background-color: black;
+  border: 2px solid white;
+  padding: .5rem;
+  color: white;
 }
 .userCreate{
   margin-top: 15%;

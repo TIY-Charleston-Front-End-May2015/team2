@@ -47,6 +47,12 @@ var page = {
     $('.content').on('click','.editMessage', page.checkIfUserCanEdit);
     $('.content').on('click', '.submitEdit', page.submitTheEdit);
     $('.toggle').on('click', 'a', page.togglePages);
+    $(window).on('beforeunload', function(){ //added popup to have users log out to avoid locking account
+          if(page.yourUsername !== ""){
+            return "Please Log Out to Avoid Locking Account"
+          }
+      });
+
 
     },
 

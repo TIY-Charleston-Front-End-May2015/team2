@@ -59,6 +59,7 @@ var page = {
     });
 
 },
+
     selectImage: function(e){
       page.selectedImage= $(this).attr('value');
       // console.log("you selected an image ", page.selectedImage);
@@ -303,6 +304,7 @@ var page = {
       url: page.url,
       method: 'GET',
       success: function (data) {
+        page.totalMessage = data.length;
         console.log("load messages data:",data);
         page.addAll(data);
       },

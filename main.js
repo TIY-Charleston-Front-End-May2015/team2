@@ -46,6 +46,7 @@ var page = {
     $('.logOut').on('click', page.logOut);
     $('.content').on('click','.editMessage', page.checkIfUserCanEdit);
     $('.content').on('click', '.submitEdit', page.submitTheEdit);
+    $('.toggle').on('click', 'a', page.togglePages);
 
     },
 
@@ -54,6 +55,12 @@ var page = {
       // console.log("you selected an image ", page.selectedImage);
 
     },
+    togglePages: function (event) {
+    event.preventDefault();
+    var clickedPage = $(this).attr('rel');
+    $(clickedPage).siblings().removeClass('active');
+    $(clickedPage).addClass('active');
+  },
 
 
     logOut: function(e){
@@ -335,7 +342,6 @@ var page = {
   };
   // if(globalUserName === $(.textBox).siblings(something).children('.theUserName')) {
 
-        //******DONT DELETE *****/
         $(this).next().toggleClass('active');
 
 
@@ -389,17 +395,17 @@ var page = {
   addMessage: function (event) {
     event.preventDefault();
 
-    $.ajax({
-       url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
-       method: 'GET',
-       success: function (data) {
-               console.log("this is the login data: ", data);
-               _.each(data, function(e, i){
-                       console.log("user name: ", i);
-                 }
-               });
-             }
-     });
+    // $.ajax({
+    //    url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+    //    method: 'GET',
+    //    success: function (data) {
+    //            console.log("this is the login data: ", data);
+    //            _.each(data, function(e, i){
+    //                    console.log("user name: ", i);
+    //              }
+    //            });
+    //          }
+    //  });
 
 
       var newMessage = {

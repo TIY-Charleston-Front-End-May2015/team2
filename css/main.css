@@ -1,17 +1,79 @@
 body{
-
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 2em;
+  background-color: grey;
 }
 
 section {
   width: 80%;
-  height: 50em;
+  height: 40em;
   margin: 0;
   padding: 0;
-  display: inline-block;
 }
+
+.userBar{
+  width: 20%;
+  background-color: #1e9525;
+  display:inline-block;
+  height: 30em;
+}
+
+video#bgvid {
+position: fixed;
+top: 50%;
+left: 50%;
+padding: 0px;
+margin: 0px;
+min-width: 100%;
+min-height: 100%;
+width: auto;
+height: auto;
+z-index: -100;
+-webkit-transform: translateX(-50%) translateY(-50%);
+transform: translateX(-50%) translateY(-50%);
+background: url("http://cobblehilldigital.com/wp-content/themes/cobblehill/videos/cobble-hill-video.mp4") no-repeat;
+background-size: cover;
+}
+
+.heroButton {
+  position: fixed;
+  border: 2px solid black;
+  top: 30%;
+  left: 37%;
+  padding: .5em;
+  font-size: 2em;
+  font-family: copperplate;
+}
+
+ .heroTitle {
+  position: fixed;
+  top: 25%;
+  left: 20%;
+  font-size: 6em;
+  font-family: copperplate;
+  z-index: 1;
+  list-style: none;
+}
+
+.heroTitle:hover {
+  text-decoration: none;
+}
+
+.heroBox {
+  position: fixed;
+  height: 50em;
+  width: 50em;
+  background: -moz-linear-gradient(top,  rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.72) 93%, rgba(255,255,255,0.72) 99%); FF3.6+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.72)), color-stop(93%,rgba(255,255,255,0.72)), color-stop(99%,rgba(255,255,255,0.72))); Chrome,Safari4+
+  background: -webkit-linear-gradient(top,  rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 93%,rgba(255,255,255,0.72) 99%); Chrome10+,Safari5.1+
+  background: -o-linear-gradient(top,  rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 93%,rgba(255,255,255,0.72) 99%); Opera 11.10+
+  background: -ms-linear-gradient(top,  rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 93%,rgba(255,255,255,0.72) 99%); IE10+
+  background: linear-gradient(to bottom,  rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 93%,rgba(255,255,255,0.72) 99%); W3C
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8ffffff', endColorstr='#b8ffffff',GradientType=0 ); IE6-9
+}
+
+
 
 /* Aside */
 .userName, .password, .verifyPassword {
@@ -76,9 +138,10 @@ border: 1px solid black;
   border-left: 8px solid #272B33;
   border-right: 8px solid #272B33;
   padding: 1em;
-  height: 42.1em;
+  height: 36.3em;
   overflow: scroll;
   background-origin: border-box;
+  background-color: white;
 }
 
 
@@ -206,9 +269,9 @@ border-radius: 2px;
 
 .userBar{
   width: 20%;
-  background-color: #1e9525;
+  background-color: #00943A;
   display:inline-block;
-  height: 50em;
+  height: 44em;
 }
 
 .initialVisit{
@@ -257,6 +320,10 @@ border-radius: 2px;
 .userSubmit{
   margin-top: 8%;
   display:none;
+  background-color: black;
+  border: 2px solid white;
+  padding: .5rem;
+  color: white;
 }
 .userCreate{
   margin-top: 15%;

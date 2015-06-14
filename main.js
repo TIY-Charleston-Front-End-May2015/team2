@@ -33,6 +33,12 @@ var page = {
     $('.userSubmit').on('click', page.loginAccount);
     $('.pickImage').on('click', 'input[type=radio]', page.selectImage);
     $('.logOut').on('click', page.logOut);
+    $(window).on('beforeunload', function(){ //added popup to have users log out to avoid locking account
+          if(page.yourUsername !== ""){
+            return "Please Log Out to Avoid Locking Account"
+          }
+      });
+
 
     $('.content').on('click', '.editMessage', function (e) {
       e.preventDefault();

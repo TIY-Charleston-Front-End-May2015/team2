@@ -10,12 +10,24 @@
 </head>
 
 <body>
+  <div class="page gradient active">
+    <div class="heroBox toggle">
+<nav>
+  <a href="#" class="heroTitle" rel=".everything"><li>Chat Room App</li></a>
+</nav>
+</div>
+  <video autoplay loop poster="http://cobblehilldigital.com/wp-content/themes/cobblehill/videos/cobble-hill-video.mp4" id="bgvid">
+  <source src="http://cobblehilldigital.com/wp-content/themes/cobblehill/videos/cobble-hill-video.mp4" type="video/webm">
+  <source src="http://cobblehilldigital.com/wp-content/themes/cobblehill/videos/cobble-hill-video.mp4" type="video/mp4">
+  </video>
+</div>
+<div class="page everything">
   <div class="pageWrapper">
-  <aside class="userBar">
+   <aside class="userBar">
       <div class="initialVisit active">
         <a href="#" class="newUser active">New?</a>
         <a href="#" class="returnUser">Been here before?</a>
-        <form class="loginData" >
+        <form class="loginData">
               <input type="text" name="userName" class="userName active" value="" placeholder="userName?">
               <input type="password" name="password" class="password active" value="" placeholder="password?">
               <input type="password" name="password" class="verifyPassword" value="" placeholder="repeat password?">
@@ -27,46 +39,52 @@
                     <div class="imageOption"><input type="radio" class="radio" name="image1" value="https://octodex.github.com/images/momtocat.png"><img src="https://octodex.github.com/images/momtocat.png" width= "40" alt="" /></div>
                     <div class="imageOption"><input type="radio" class="radio" name="image1" value="https://octodex.github.com/images/riddlocat.png"><img src="https://octodex.github.com/images/riddlocat.png" width= "40" alt="" /></div>
               </div>
-              <button type="button" name="userSubmit" class="userSubmit active">Submit</button>
+              <button type="button" name="userSubmit" class="userSubmit active" rel=".chat">Submit</button>
               <button type="button" name="userCreate" class="userCreate">Create</button>
               <p class="feedbackMessage" id="response"> </p>
 
         </form>
-        <div class= "loggedOn">
+        <div class="loggedOn">
               <img src=""/> <h4></h4>
         </div>
         <button type="button" name="logOut" class= "logOut">logOut</button>
 
       </div>
-</aside>
-<!-- Trevor is working on this -->
-
+  </aside>
 <section>
-  <div class="page chat active">
+  <div class="page chat">
             <div class="title"><div class="burger"><span><i class="fa fa-bars"></i></span></div><div class="theText">The chat block</div><div class="search"><span><i class="fa fa-search"></i></span></div></div>
             <div class="content chatRoom">
-              
+
             </div>
+
             <div class="threeBox">
+
                 <div class="buttonBox">
                   <div class="sendButton">
                      Button
                   </div>
                 </div>
                 <div class="homeBox">
-                  <input type="text" name="message" value="" placeholder="  Enter message here...">
+                  <form class="enterAway">
+                    <input class="messageInput" type="text" name="message" value="" placeholder="  Enter message here...">
+                  </form>
                 </div>
                 <div class="buttonBox">
+                  <form class="clickAway">
                   <div class="sendButton">
                     Send
                   </div>
-
+                </form>
                 </div>
+
              </div>
+
           </div>
 </section>
 </div>
-<script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
+</div>
+<script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"> </script>
 <script type="text/javascript" src="templates.js"></script>
 <script type="text/javascript" src="main.js"></script>

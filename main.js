@@ -2,6 +2,16 @@ $(document).ready(function () {
   page.init();
 });
 
+function search (searchWord) {
+  //split up searchWord.toLowerCase
+  //if they type shake, and you want to return shakespeare
+  //   [s,h,a,k,e] !== [s,h,a,k,e,s,p,e,a,r,e,]
+ //   searchLength = search.length;
+  //   check only the characters in the database (in messages), up to
+  //   searchLength
+  //  [s,h,a,k,e] === [s,h,a,k,e,s,p,e,a,r,e,].slice(0,searchLength)
+}
+
 
 var page = {
   url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat",
@@ -10,6 +20,7 @@ var page = {
   yourPassword: "",
   selectedImage: "",
   exists: true,
+  totalMessages: 0,
 
 
   init: function (arguments) {
@@ -26,37 +37,46 @@ var page = {
   initEvents: function () {
 
     $('.content').on('click', '.delete', page.deleteMessage);
-    $('.sendButton').on('click', page.addMessage);
+    $('.clickAway').on('click', page.addMessage);
+    $('.enterAway').on('submit', page.addMessage);
     $('.newUser').on('click', page.createLogin);
     $('.returnUser').on('click', page.userLogin);
     $('.userCreate').on('click', page.createAccount);
     $('.userSubmit').on('click', page.loginAccount);
     $('.pickImage').on('click', 'input[type=radio]', page.selectImage);
     $('.logOut').on('click', page.logOut);
+    $('.content').on('click','.editMessage', page.checkIfUserCanEdit);
+    $('.content').on('click', '.submitEdit', page.submitTheEdit);
+    $('.toggle').on('click', 'a', page.togglePages);
     $(window).on('beforeunload', function(){ //added popup to have users log out to avoid locking account
           if(page.yourUsername !== ""){
             return "Please Log Out to Avoid Locking Account"
           }
       });
 
+      setInterval(function(){
+        $.ajax({
+        url: page.url,
+        method: 'GET',
+        success: function (data) {
 
-    $('.content').on('click', '.editMessage', function (e) {
-      e.preventDefault();
-      $(this).next().toggleClass('active');
-    });
+          var checkLength = data.length;
+          console.log("length:",data.length);
+          console.log("load messages data:",data);
+          if(page.totalMessages !== checkLength) {
+            $('.chat > .content').empty()
+            page.addAll(data);
+          }else {
+            console.log("no new messages");
+          }
 
-    $('.content').on('click', '.submitEdit', function (e) {
-      e.preventDefault();
-      var $thisEditing = $(this).closest('.editing');
-      var messageId = $(this).closest('article').data('id');
-      var updatedMessage = {
-        message: $thisEditing.find('.editMessage').val(),
-      };
-      console.log("the updated message:",updatedMessage)
-      page.updateMessage(updatedMessage, messageId);
+        },
+        error: function (err) {
+          console.log("error on load messages:", err);
+        }
+      });
 
-
-    });
+    }, 3000);
 
 },
 
@@ -65,6 +85,13 @@ var page = {
       // console.log("you selected an image ", page.selectedImage);
 
     },
+    togglePages: function (event) {
+    event.preventDefault();
+    var clickedPage = $(this).attr('rel');
+    $(clickedPage).siblings().removeClass('active');
+    $(clickedPage).addClass('active');
+  },
+
 
     logOut: function(e){
         console.log("you want to log out");
@@ -101,6 +128,8 @@ var page = {
       $('.loggedOn').removeClass('active');
       $('.loggedOn img').attr("src", page.yourImage );
       $('.loggedOn h4').text(page.yourUsername);
+      $('.chat').removeClass('active');
+      $('.chat').addClass('page');
     },
     userLogin: function(e){
       e.preventDefault();
@@ -185,6 +214,8 @@ var page = {
                                       $('.loggedOn').addClass('active');
                                       $('.loggedOn img').attr("src", page.yourImage);
                                       $('.loggedOn h4').text(page.yourUsername);
+                                      $('.chat').removeClass('page');
+                                      $('.chat').addClass('active');
                                 }
 
                             }
@@ -275,7 +306,9 @@ var page = {
                        $('.loggedOn').addClass('active');
                        $('.loggedOn img').attr("src", page.yourImage);
                        $('.loggedOn h4').text(page.yourUsername);
-                       $('.loginData').reset();
+                       $('.chat').removeClass('page');
+                       $('.chat').addClass('active');
+                      //  $('.loginData').reset();
 
                      },
                      error: function (err) {
@@ -300,11 +333,12 @@ var page = {
 
   loadMessages: function () {
 
-    $.ajax({
+      $.ajax({
       url: page.url,
       method: 'GET',
       success: function (data) {
-        page.totalMessage = data.length;
+        page.totalMessages = data.length;
+        console.log("length:",data.length);
         console.log("load messages data:",data);
         page.addAll(data);
       },
@@ -324,7 +358,10 @@ var page = {
       success: function (data) {
 
         page.addOne(data);
-        console.log("on success create a message: ", data);
+        page.totalMessages = data.length;
+        console.log("successful message creation = ", data);
+        console.log("user:",page.yourUserName);
+        console.log("image:",page.yourImage);
       },
       error: function (err) {
         console.log("error on create message:", err);
@@ -332,6 +369,38 @@ var page = {
     });
 
   },
+
+  checkIfUserCanEdit: function (e) {
+
+  e.preventDefault();
+
+
+  var check = $(this).attr("name")
+  console.log("check value:",check)
+
+  if(check === page.yourUsername) {
+    console.log("you can edit")
+    $(this).next().toggleClass('active');
+  }else {
+    console.log("you cant edit")
+  };
+
+},
+
+  submitTheEdit: function (e) {
+
+    e.preventDefault();
+      console.log("submit the edit");
+          var $thisEditing = $(this).closest('.editing');
+          var messageId = $(this).closest('article').data('id');
+          var updatedMessage = {
+          message: $thisEditing.find('.editMessage').val(),
+        };
+      console.log("the updated message:",updatedMessage)
+      page.updateMessage(updatedMessage, messageId);
+  },
+
+
   updateMessage: function (editedMessage, messageId) {
 
     $.ajax({
@@ -346,28 +415,55 @@ var page = {
       error: function (err) {}
     });
   },
+
   deleteMessage: function(e) {
     e.preventDefault();
 
-    $.ajax({
-      url: page.url + "/" + $(this).closest('article').data('id'),
-      method: 'DELETE',
-      success: function (data) {
-        console.log("this:",this);
-        $('.content').html('');
-        page.loadMessages();
+    var check = $(this).attr("name")
+    console.log("check value:",check)
 
-      }
-    });
+    if(check === page.yourUsername) {
+      console.log("you can delete")
+      $.ajax({
+        url: page.url + "/" + $(this).closest('article').data('id'),
+        method: 'DELETE',
+        success: function (data) {
+          console.log("this delete:",this);
+          $('.content').html('');
+          page.loadMessages();
+
+        }
+      });
+    }else {
+      console.log("you cant delete")
+    };
+
+
   },
 
   addMessage: function (event) {
     event.preventDefault();
 
-    var newMessage = {
+    // $.ajax({
+    //    url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+    //    method: 'GET',
+    //    success: function (data) {
+    //            console.log("this is the login data: ", data);
+    //            _.each(data, function(e, i){
+    //                    console.log("user name: ", i);
+    //              }
+    //            });
+    //          }
+    //  });
+
+
+      var newMessage = {
       message: $('input[name="message"]').val(),
+      user: page.yourUsername,
+      image: page.yourImage
 
     };
+
     page.createMessage(newMessage);
 
     $('input, textarea').val("");

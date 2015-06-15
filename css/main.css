@@ -21,7 +21,7 @@ section {
 
 video#bgvid {
 position: fixed;
-top: 50%;
+top: 40%;
 left: 50%;
 padding: 0px;
 margin: 0px;
@@ -32,7 +32,7 @@ height: auto;
 z-index: -100;
 -webkit-transform: translateX(-50%) translateY(-50%);
 transform: translateX(-50%) translateY(-50%);
-background: url("http://cobblehilldigital.com/wp-content/themes/cobblehill/videos/cobble-hill-video.mp4") no-repeat;
+background: url("css/nik2.mp4") no-repeat;
 background-size: cover;
 }
 
@@ -48,15 +48,57 @@ background-size: cover;
 
  .heroTitle {
   position: fixed;
+  padding: .5rem 2rem;
   top: 25%;
   left: 20%;
   font-size: 6em;
   font-family: copperplate;
   z-index: 1;
   list-style: none;
-  background-color: grey;
-  border: 2px solid black;
-  box-shadow: 0em 0.1em 0.1em #000000;
+  border: 1px solid grey;
+  box-shadow: 0px 1px 1px #ffffff;
+  background: rgb(246,248,249); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(215,222,227,1) 51%, rgba(245,247,249,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(246,248,249,1)), color-stop(50%,rgba(229,235,238,1)), color-stop(51%,rgba(215,222,227,1)), color-stop(100%,rgba(245,247,249,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
+
+
+
+}
+
+.heroLogin {
+ position: fixed;
+ padding: .5rem 2rem;
+ top: 55%;
+ left: 26%;
+ font-size: 3em;
+ font-family: copperplate;
+ z-index: 1;
+ list-style: none;
+ background-color: grey;
+ border: 2px solid black;
+ list-style: none;
+ box-shadow: 0em 0.1em 0.1em #000000;
+ text-decoration: none;
+}
+
+.heroCreate {
+ position: fixed;
+ padding: .5rem 1rem;
+ top: 55%;
+ left: 41%;
+ font-size: 3em;
+ font-family: copperplate;
+ z-index: 1;
+ list-style: none;
+ background-color: grey;
+ border: 2px solid black;
+ list-style: none;
+ box-shadow: 0em 0.1em 0.1em #000000;
 }
 
 .heroTitle:hover {
@@ -104,23 +146,15 @@ border: 1px solid black;
 
 /* Top Buttons */
 
-.burger {
-  width: 39%;
-  display: flex;
-  font-size: 2rem;
-}
 
 .theText {
-  width: 57%;
+  width: 100%;
   display: flex;
   font-size: 2rem;
+  text-align: center;
+  left: 50%;
 }
 
-.search {
-  width: 4%;
-  display: flex;
-  font-size: 2rem;
-}
 
 .chatRoom {
   border-left: 8px solid #272B33;

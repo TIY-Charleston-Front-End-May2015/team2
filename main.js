@@ -19,11 +19,13 @@ var page = {
   yourImage: "",
   yourPassword: "",
   selectedImage: "",
+  whoWereYou: "",
   exists: true,
   totalMessages: 0,
   totalPeople: 0,
   totalOnline: 0,
   totalOffline: 0,
+  findName: true,
 
 
 
@@ -52,6 +54,9 @@ var page = {
     $('.content').on('click','.editMessage', page.checkIfUserCanEdit);
     $('.content').on('click', '.submitEdit', page.submitTheEdit);
     $('.toggle').on('click', 'a', page.togglePages);
+    $('.editUser').on('click', page.editName);
+    $('.NewuserSubmit').on('click', page.updateUserNameNow);
+    $('.cancelChange').on('click', page.cancelChangeUser);
     $(window).on('beforeunload', function(){ //added popup to have users log out to avoid locking account
           if(page.yourUsername !== ""){
             return "Please Log Out to Avoid Locking Account"
@@ -84,7 +89,7 @@ var page = {
 
     setInterval(function(){
           $.ajax({
-          url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+          url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
           method: 'GET',
           success: function (data) {
             var online = 0;
@@ -117,7 +122,7 @@ var page = {
 
     selectImage: function(e){
       page.selectedImage= $(this).attr('value');
-      // console.log("you selected an image ", page.selectedImage);
+      console.log("you selected an image ", page.selectedImage);
 
     },
     togglePages: function (event) {
@@ -126,6 +131,163 @@ var page = {
     $(clickedPage).siblings().removeClass('active');
     $(clickedPage).addClass('active');
   },
+
+  editName: function(e){
+      e.preventDefault();
+      $('.editUser').removeClass('active');
+      $('.editInfoUser').addClass('active');
+      console.log("lets change the name");
+
+  },
+
+  cancelChangeUser: function(){
+    $('.editUser').addClass('active');
+    $('.editInfoUser').removeClass('active');
+    $('#response').empty();
+
+  },
+
+  updateUserNameNow: function(e){
+    e.preventDefault();
+    var newUserName = $('.NewuserName').val();
+    if(newUserName !== ""){
+      page.pushNewUserName(newUserName);
+    }
+    else{
+      console.log("enter new user name");
+    }
+  },
+
+
+  pushNewUserName: function(name){
+    console.log("current user name: ", page.yourUsername);
+    console.log("new user name: ", name);
+    //Create and "log in" to the updated name
+    page.whoWereYou = page.yourUsername;
+    page.addNewUsernametoServer(name);
+
+  },
+
+  addNewUsernametoServer: function(name){
+    var userAccount = name;
+    $.ajax({
+        url:  "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
+        method: 'GET',
+        success: function (data) {
+                _.each(data, function(e, i){
+                  if(i === userAccount){
+                    console.log("this username already exists");
+                    page.findName = false;
+
+                  }
+                });
+                if(page.findName){
+                  console.log("WHYYYYYYY!!!!!: " ,page.findName);
+                            var user = {
+                                isOnline: true,
+                                pass: page.yourPassword,
+                                image: page.yourImage
+                            };
+                            var objectToSend = {};
+                            objectToSend[userAccount] = user;
+                        $.ajax({
+                             url:  "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
+                             method: 'PUT',
+                             data: objectToSend,
+                             success: function (data) {
+                               console.log("success!!: ", data);
+                               page.yourUsername= userAccount;
+                               page.logOutOfDeleted();
+                               page.findMessageUser();
+                               page.turnStuffOff();
+                               $('.whosOnline').empty();
+                               page.loadPeople();
+                               $('.editUser').addClass('active');
+                               $('.editInfoUser').removeClass('active');
+                               console.log("we are all done updating your info!");
+                               $('#response').empty();
+                               page.findName = true;
+
+                             },
+                             error: function (err) {
+                               console.log("error ", err);
+                             }
+                      });
+                }
+                else{
+                  // console.log("cant create this account");
+                  // console.log("page exists", page.findName);
+                  $(".feedbackMessage").addClass('active');
+                  $('#response').text('User Already Exists');
+                }
+              }
+      });
+
+
+  },
+
+  logOutOfDeleted: function(){
+    var userAccount = page.whoWereYou;
+    var user = {
+        isOnline: false,
+        pass: page.yourPassword,
+        image: page.yourImage,
+    };
+    var objectToSend = {};
+    objectToSend[userAccount] = user;
+
+    $.ajax({
+        url:  "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
+        method: 'PUT',
+        data: objectToSend,
+        success: function (data) {
+          },
+        error: function (err) {
+
+        }
+      });
+
+    },
+
+    findMessageUser: function(){
+      $.ajax({
+      url: page.url,
+      method: 'GET',
+      success: function (data) {
+        page.filterThroughMessages(data);
+      },
+      error: function (err) {
+        console.log("error on load messages:", err);
+      }
+    });
+
+  },
+
+  filterThroughMessages: function(data){
+    _.each(data, function(e){
+          if(e._id === "557e214b24c7a7030000029b"){
+            console.log("this is the user account: ", e._id);
+          }
+          else{
+            console.log("trying to change the messages: ", e.user);
+            console.log("who were you? ". whoWereYour)
+            if(e.user === page.whoWereYou){
+              console.log("this is one of your messaged: ", e);
+              console.log("this is the id of your message: ", e._id);
+              var updatedUser = {
+                user: page.yourUsername,
+                };
+              console.log("the updated user:",updatedUser)
+              page.updateMessage(updatedUser, e._id);
+            }
+          }
+    });
+
+  },
+
+
+
+
 
 
     logOut: function(e){
@@ -141,7 +303,7 @@ var page = {
         objectToSend[userAccount] = user;
 
         $.ajax({
-            url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+            url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
             method: 'PUT',
             data: objectToSend,
             success: function (data) {
@@ -196,20 +358,20 @@ var page = {
       $(".feedbackMessage").removeClass('active');
     var username= $('.userName').val();
     var password= $('.password').val();
-    console.log("username: ", username);
-    console.log("password: ", password);
+    // console.log("username: ", username);
+    // console.log("password: ", password);
     if(username !== "" && password !== ""){
           $.ajax({
-              url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+              url:  "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
               method: 'GET',
               success: function (data) {
-                      console.log("this is the login data: ", data);
+                      // console.log("this is the login data: ", data);
                       _.each(data, function(e, i){
                         if(i === username){
-                          console.log("this is the info: ", e);
+                          // console.log("this is the info: ", e);
 
                             if(e.pass === password){
-                                    console.log("you selected the correct password " ,e.isOnline);
+                                    // console.log("you selected the correct password " ,e.isOnline);
                                     if(e.isOnline === "true"){
                                       $(".feedbackMessage").addClass('active');
                                       $('#response').text('User is Already Logged On');
@@ -218,8 +380,8 @@ var page = {
                                       page.yourUsername= username;
                                       page.yourImage= e.image;
                                       page.yourPassword = e.pass;
-                                      console.log("your image: ", page.yourImage);
-                                      console.log("your username: ", page.yourUsername);
+                                      // console.log("your image: ", page.yourImage);
+                                      // console.log("your username: ", page.yourUsername);
                                       var userAccount = page.yourUsername;
                                       var user = {
                                           isOnline: true,
@@ -230,7 +392,7 @@ var page = {
                                       objectToSend[userAccount] = user;
 
                                       $.ajax({
-                                          url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+                                          url:  "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
                                           method: 'PUT',
                                           data: objectToSend,
                                           success: function (data) {
@@ -239,27 +401,14 @@ var page = {
 
                                           }
                                       });
-                                      $(".feedbackMessage").removeClass('active');
-                                      $('.returnUser').removeClass('active');
-                                      $('.newUser').removeClass('active');
-                                      $('.verifyPassword').removeClass('active');
-                                      $('.pickImage').removeClass('active');
-                                      $('.userCreate').removeClass('active');
-                                      $('.userSubmit').removeClass('active');
-                                      $('.loginData input').removeClass('active');
-                                      $('.logOut').addClass('active');
-                                      $('.loggedOn').addClass('active');
-                                      $('.loggedOn img').attr("src", page.yourImage);
-                                      $('.loggedOn h4').text(page.yourUsername);
-                                      $('.chat').removeClass('page');
-                                      $('.chat').addClass('active');
-                                      $('.whosOnline').addClass('active');
+                                      page.turnStuffOff();
+                                      $('.whosOnline').empty();
                                       page.loadPeople();
                                 }
 
                             }
                             else{
-                              console.log("you used this password: ", password);
+                              // console.log("you used this password: ", password);
                               $(".feedbackMessage").addClass('active');
                               $('#response').text('Incorrect Password');
                             }
@@ -277,45 +426,63 @@ var page = {
       $('#response').text('Please Enter Password');
     }
     else if(username =="" && password !== ""){
-      console.log("please enter username");
+      // console.log("please enter username");
       $(".feedbackMessage").addClass('active');
       $('#response').text('Please Enter Username');
     }
     else{ //if button is pressed but nothing was entered it will do nothing
-      console.log("please enter user name and password");
+      // console.log("please enter user name and password");
     }
   },
 
 
+  turnStuffOff: function(){
+    $(".feedbackMessage").removeClass('active');
+    $('.returnUser').removeClass('active');
+    $('.newUser').removeClass('active');
+    $('.verifyPassword').removeClass('active');
+    $('.pickImage').removeClass('active');
+    $('.userCreate').removeClass('active');
+    $('.userSubmit').removeClass('active');
+    $('.loginData input').removeClass('active');
+    $('.logOut').addClass('active');
+    $('.loggedOn').addClass('active');
+    $('.loggedOn img').attr("src", page.yourImage);
+    $('.loggedOn h4').text(page.yourUsername);
+    $('.chat').removeClass('page');
+    $('.chat').addClass('active');
+    $('.whosOnline').addClass('active');
+  },
+
   createAccount: function(e){
-    console.log("decided to create account");
-    console.log($('.userName').val());
+    // console.log("decided to create account");
+    // console.log($('.userName').val());
     var password= $('.password').val();
     var vPassword= $('.verifyPassword').val();
-    console.log(page.selectedImage);
+    // console.log(page.selectedImage);
     if(password !== vPassword){
-      console.log("password does not match");
+      // console.log("password does not match");
     }
     else{
       var userAccount = $('.userName').val();
-      console.log("this is page exists: ", page.exists);
+      // console.log("this is page exists: ", page.exists);
       $.ajax({
-          url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+          url: page.url,
           method: 'GET',
           success: function (data) {
-                  console.log("this is the login data: ", data);
+                  // console.log("this is the login data: ", data);
                   _.each(data, function(e, i){
                     if(i === userAccount){
-                      console.log("this username already exists");
+                      // console.log("this username already exists");
                       page.exists = false;
-                      console.log("this is page.exists: ", page.exists)
+                      // console.log("this is page.exists: ", page.exists)
 
                     }
                   });
                 }
         });
         if(page.exists){
-          console.log("it said this was false: " ,page.exists)
+          // console.log("it said this was false: " ,page.exists)
                     var user = {
                         isOnline: true,
                         pass: password,
@@ -323,33 +490,21 @@ var page = {
                     };
                     var objectToSend = {};
                     objectToSend[userAccount] = user;
+                    console.log("this is object to send: ", objectToSend);
                 $.ajax({
-                     url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+                     url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
                      method: 'PUT',
                      data: objectToSend,
                      success: function (data) {
-                       console.log("success!!: ", data);
+                      //  console.log("success!!: ", data);
                        page.yourUsername= userAccount;
                        page.yourImage= page.selectedImage;
                        page.yourPassword= password;
-                       console.log("these are set for the page: ", page.yourUsername + page.yourImage);
-                       $(".feedbackMessage").removeClass('active');
-                       $('.returnUser').removeClass('active');
-                       $('.newUser').removeClass('active');
-                       $('.verifyPassword').removeClass('active');
-                       $('.pickImage').removeClass('active');
-                       $('.userCreate').removeClass('active');
-                       $('.userSubmit').removeClass('active');
-                       $('.loginData input').removeClass('active');
-                       $('.logOut').addClass('active');
-                       $('.loggedOn').addClass('active');
-                       $('.loggedOn img').attr("src", page.yourImage);
-                       $('.loggedOn h4').text(page.yourUsername);
-                       $('.chat').removeClass('page');
-                       $('.chat').addClass('active');
-                       $('.whosOnline').addClass('active');
+                      //  console.log("these are set for the page: ", page.yourUsername + page.yourImage);
+                      page.turnStuffOff();
+                      $('.whosOnline').empty();
                        page.loadPeople();
-                       $('.loginData').reset();
+                      //  $('.loginData').reset();
 
                      },
                      error: function (err) {
@@ -358,18 +513,20 @@ var page = {
               });
         }
         else{
-          console.log("cant create this account");
-          console.log("page exists");
+          // console.log("cant create this account");
+          // console.log("page exists");
+          $(".feedbackMessage").addClass('active');
+          $('#response').text('User Already Exists');
         }
     }
   },
   addOne: function (message) {
     page.loadTemplate("message", message, $('.chat > .content'));
-    console.log("one message to the dom:",message);
+    // console.log("one message to the dom:",message);
   },
   addAll: function (messageCollection) {
     _.each(messageCollection, page.addOne);
-    console.log("message collection:",messageCollection)
+    // console.log("message collection:",messageCollection)
   },
 
   loadMessages: function () {
@@ -379,8 +536,8 @@ var page = {
       method: 'GET',
       success: function (data) {
         page.totalMessages = data.length;
-        console.log("length:",data.length);
-        console.log("load messages data:",data);
+        // console.log("length:",data.length);
+        // console.log("load messages data:",data);
         page.addAll(data);
       },
       error: function (err) {
@@ -400,9 +557,9 @@ var page = {
 
         page.addOne(data);
         page.totalMessages = data.length;
-        console.log("successful message creation = ", data);
-        console.log("user:",page.yourUserName);
-        console.log("image:",page.yourImage);
+        // console.log("successful message creation = ", data);
+        // console.log("user:",page.yourUserName);
+        // console.log("image:",page.yourImage);
       },
       error: function (err) {
         console.log("error on create message:", err);
@@ -417,13 +574,13 @@ var page = {
 
 
   var check = $(this).attr("name")
-  console.log("check value:",check)
+  // console.log("check value:",check)
 
   if(check === page.yourUsername) {
-    console.log("you can edit")
+    // console.log("you can edit")
     $(this).next().toggleClass('active');
   }else {
-    console.log("you cant edit")
+    // console.log("you cant edit")
   };
 
 },
@@ -497,13 +654,13 @@ var page = {
   },
 
   addOnePerson: function (data) {
-    console.log("this is the login: ", data);
+    // console.log("this is the login: ", data);
     page.loadTemplate("Online", data, $('.whosOnline'));
   },
   addAllPeople: function (allPeople) {
     page.totalOnline = 0;
     page.totalOffline = 0;
-    console.log("this is what we are passing: ", allPeople);
+    // console.log("this is what we are passing: ", allPeople);
     _.each(allPeople,function(e, i){
       if(i === "_id"){console.log("this is the id");}
       else{
@@ -523,11 +680,11 @@ var page = {
   loadPeople: function () {
 
       $.ajax({
-      url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557b32324ef0f403000002a7",
+      url:  "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
       method: 'GET',
       success: function (data) {
         page.totalPeople = data.length;
-        console.log("load people data:",data);
+        // console.log("load people data:",data);
         page.addAllPeople(data);
       },
       error: function (err) {

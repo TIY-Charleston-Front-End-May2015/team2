@@ -2,7 +2,13 @@ body{
   width: 100%;
   margin: 0;
   padding: 2em;
-  background-color: grey;
+
+}
+
+.everything {
+  background-image: url(css/pong.png);
+  background-size: cover;
+  overflow: hidden;
 }
 
 section {
@@ -12,16 +18,17 @@ section {
   padding: 0;
 }
 
-.userBar{
+
+/* .userBar{
   width: 20%;
-  background-color: #1e9525;
+  background-color: #272B33;
   display:inline-block;
   height: 30em;
-}
+} */
 
 video#bgvid {
 position: fixed;
-top: 40%;
+top: 50%;
 left: 50%;
 padding: 0px;
 margin: 0px;
@@ -32,9 +39,11 @@ height: auto;
 z-index: -100;
 -webkit-transform: translateX(-50%) translateY(-50%);
 transform: translateX(-50%) translateY(-50%);
-background: url("css/nik2.mp4") no-repeat;
+background: url("http://static-p.iuqo.com/media/home/home/video/cloud.mp4") no-repeat;
 background-size: cover;
 }
+
+
 
 .heroButton {
   position: fixed;
@@ -49,56 +58,91 @@ background-size: cover;
  .heroTitle {
   position: fixed;
   padding: .5rem 2rem;
-  top: 25%;
-  left: 20%;
+  top: 27%;
+  left: 27%;
   font-size: 6em;
-  font-family: copperplate;
+  font-family: slackey;
   z-index: 1;
   list-style: none;
-  border: 1px solid grey;
-  box-shadow: 0px 1px 1px #ffffff;
-  background: rgb(246,248,249); /* Old browsers */
-  background: -moz-linear-gradient(top,  rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(215,222,227,1) 51%, rgba(245,247,249,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(246,248,249,1)), color-stop(50%,rgba(229,235,238,1)), color-stop(51%,rgba(215,222,227,1)), color-stop(100%,rgba(245,247,249,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
+  border: 2px solid white;
+  box-shadow: 0em 1px 1px #000000;
+  border-radius: 8px;
+  color: #58AAD9;
+  background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+}
 
-
-
+.heroTitle:hover {
+  color: #8EC24B;
 }
 
 .heroLogin {
  position: fixed;
  padding: .5rem 2rem;
- top: 55%;
- left: 26%;
+ top: 64%;
+ left: 41%;
  font-size: 3em;
- font-family: copperplate;
+ font-family: slackey;
  z-index: 1;
  list-style: none;
- background-color: grey;
- border: 2px solid black;
+ border: 2px solid white;
  list-style: none;
- box-shadow: 0em 0.1em 0.1em #000000;
+ box-shadow: 0px 1px 0px 1px #000000;
+ border-radius: 10px;
  text-decoration: none;
+ color: #58AAD9;
+ background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+
+}
+
+.heroTitle:hover {
+  color: #8EC24B;
+  text-decoration: none;
+}
+
+.heroCreate:hover {
+  color: #8EC24B;
+  text-decoration: none;
+}
+
+.heroLogin:hover {
+  color: #8EC24B;
+  text-decoration: none;
 }
 
 .heroCreate {
  position: fixed;
  padding: .5rem 1rem;
- top: 55%;
- left: 41%;
+ top: 50%;
+ left: 32%;
  font-size: 3em;
- font-family: copperplate;
+ font-family: slackey;
  z-index: 1;
  list-style: none;
- background-color: grey;
- border: 2px solid black;
+ border: 2px solid white;
  list-style: none;
- box-shadow: 0em 0.1em 0.1em #000000;
+ box-shadow: 0px 1px 0px 1px #000000;
+ border-radius: 10px;
+ color: #58AAD9;
+ background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+
 }
 
 .heroTitle:hover {
@@ -139,9 +183,12 @@ border: 1px solid black;
   padding: 1em;
   font-weight: bold;
   text-align: center;
-  background-color: #272B33;
+  background-color: #58AAD9;
   color: white;
   display: flex;
+  border-radius: 0px 6px 0px 0px;
+  opacity: .9;
+
 }
 
 /* Top Buttons */
@@ -157,13 +204,14 @@ border: 1px solid black;
 
 
 .chatRoom {
-  border-left: 8px solid #272B33;
-  border-right: 8px solid #272B33;
+  border-left: 8px solid #58AAD9;
+  border-right: 8px solid #58AAD9;
   padding: 1em;
-  height: 36.3em;
+  height: 38.3em;
   overflow: scroll;
   background-origin: border-box;
   background-color: white;
+  z-index: 1;
 }
 
 
@@ -181,18 +229,18 @@ border: 1px solid black;
 margin: 1rem;
 text-align: center;
 font-size: 2rem;
-background-color:#1E9526;
-border: 1px solid white;
+background-color:#58AAD9;
+border: 2px solid white;
 color: white;
-border-radius: 2px;
+border-radius: 10px;
 }
 
 .deleteButton {
-background-color:#1E9526;
+background-color:#58AAD9;
 color: white;
 font-size: 1.5rem;
 padding: .5rem;
-border-radius: 2px;
+border-radius: 10px;
 }
 
 .pageWrapper {
@@ -204,13 +252,15 @@ border-radius: 2px;
 
 .profImage {
   display: flex;
-  width: 100%;
-  height: 8.5rem;
+  width: 10rem;
+  height: 7rem;
+  background-color: #58AAD9;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .profImageWrap {
-  width: 20%;
-  border: 1px solid #272B33;
+  width: 10rem;
+  border-radius: 10px 10px 0px 0px;
   text-align: center;
   height: 8.5rem;
   margin-top: 1rem;
@@ -218,13 +268,17 @@ border-radius: 2px;
 }
 
 .theUserName {
-  border: 1px solid #272B33;
+  border: 1px solid #58AAD9;
   box-sizing: border-box;
+  border-radius: 0px 0px 10px 10px;
 }
+
+
 
 .textBox {
    width: 80%;
-   border: 1px solid #272B33;
+   border: 1px solid #58AAD9;
+   border-radius: 10px;
    margin: 1rem;
    padding: .5em;
    display: flex;
@@ -254,6 +308,19 @@ border-radius: 2px;
     width: 4%;
    }
 
+   .submitEdit {
+     background-color: #58AAD9;
+     color: white;
+     width: 6.8rem;
+     height: 2em;
+     margin-left: .5rem;
+     float: right;
+   }
+
+   .message1 {
+     font-size: 1.5rem;
+   }
+
 
 /* Bottom section of the message input */
 
@@ -262,12 +329,15 @@ border-radius: 2px;
   margin: 0em;
   padding: 0em;
   display: flex;
+  border-radius: 0px 0px 10px 0px;
+  opacity: .9;
 }
 
 .homeBox {
-  width:60%;
-  border: 1px solid #232B32;
-  background-color: #272B33;
+  width:80%;
+  border: 1px solid #58AAD9;
+  background-color: #58AAD9;
+  opacity: .9;
 }
 
 .messageInput {
@@ -283,17 +353,44 @@ border-radius: 2px;
 
 .buttonBox {
   width:20%;
-  border: 1px solid #232B32;
-  background-color: #272B33;
+  border: 1px solid #58AAD9;
+  background-color: #58AAD9;
+  opacity: .9;
 }
 
 /* Start of the aside section */
 
 .userBar{
   width: 20%;
-  background-color: #00943A;
+  background-color: #58AAD9;
   display:inline-block;
   height: 44em;
+  border-radius: 4px 0px 0px 4px;
+  opacity: .9;
+}
+
+.promoBox {
+  padding: 1rem;
+  border: 2px solid white;
+  width: 70%;
+  margin-left: 11em;
+  margin-top: 13rem;
+  border-radius: 10px;
+}
+
+.promo {
+  color: white;
+  font-size: 4rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.promoDets {
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  margin: 1rem 0rem;
+  font-weight: bold;
 }
 
 .initialVisit{
@@ -308,6 +405,23 @@ border-radius: 2px;
 }
 .newUser{
   display:none;
+  color: white;
+}
+
+.NewuserSubmit {
+  background-color: #58AAD9;
+  border: 2px solid white;
+  margin-top: .1rem;
+  border-radius: 10px;
+  color: white;
+}
+
+.cancelChange {
+  background-color: #58AAD9;
+  border: 2px solid white;
+  margin-top: .1rem;
+  border-radius: 10px;
+  color: white;
 }
 
 .initialVisit a:link{
@@ -340,9 +454,11 @@ border-radius: 2px;
   transform: scale(2);
 }
 .userSubmit{
+  width: 80%;
   margin-top: 8%;
+  margin-left: 6%;
   display:none;
-  background-color: black;
+  background-color: #58AAD9;
   border: 2px solid white;
   padding: .5rem;
   color: white;
@@ -365,8 +481,13 @@ border-radius: 2px;
   display:inline-block;
 }
 .logOut {
+  color: white;
   margin-top: 5%;
   display:none;
+  background-color: #58AAD9;
+  border: 2px solid white;
+  width: 90%;
+  border-radius: 10px;
 }
 .whosOnline{
   margin-top: 3em;
@@ -389,7 +510,12 @@ border-radius: 2px;
   display:none;
 }
 .editUser{
+  width: 90%;
   display:none;
+  background-color: #58AAD9;
+  border: 2px solid white;
+  color: white;
+  border-radius: 10px;
 }
 
 

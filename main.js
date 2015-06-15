@@ -85,7 +85,7 @@ var page = {
         }
       });
 
-    }, 3000);
+    }, 1000);
 
     setInterval(function(){
           $.ajax({
@@ -467,57 +467,57 @@ var page = {
       var userAccount = $('.userName').val();
       // console.log("this is page exists: ", page.exists);
       $.ajax({
-          url: page.url,
+          url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
           method: 'GET',
           success: function (data) {
                   // console.log("this is the login data: ", data);
                   _.each(data, function(e, i){
                     if(i === userAccount){
-                      // console.log("this username already exists");
+                      console.log("this username already exists");
                       page.exists = false;
                       // console.log("this is page.exists: ", page.exists)
-
                     }
                   });
+                  if(page.exists){
+                    console.log("it said this was true: " ,page.exists)
+                              var user = {
+                                  isOnline: true,
+                                  pass: password,
+                                  image: page.selectedImage
+                              };
+                              var objectToSend = {};
+                              objectToSend[userAccount] = user;
+                              console.log("this is object to send: ", objectToSend);
+                          $.ajax({
+                               url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
+                               method: 'PUT',
+                               data: objectToSend,
+                               success: function (data) {
+                                //  console.log("success!!: ", data);
+                                 page.yourUsername= userAccount;
+                                 page.yourImage= page.selectedImage;
+                                 page.yourPassword= password;
+                                //  console.log("these are set for the page: ", page.yourUsername + page.yourImage);
+                                page.turnStuffOff();
+                                $('.whosOnline').empty();
+                                 page.loadPeople();
+                                //  $('.loginData').reset();
+
+                               },
+                               error: function (err) {
+                                 console.log("error ", err);
+                               }
+                        });
+                  }
+                  else{
+                    // console.log("cant create this account");
+                    // console.log("page exists");
+                    $(".feedbackMessage").addClass('active');
+                    $('#response').text('User Already Exists');
+                  }
                 }
         });
-        if(page.exists){
-          // console.log("it said this was false: " ,page.exists)
-                    var user = {
-                        isOnline: true,
-                        pass: password,
-                        image: page.selectedImage
-                    };
-                    var objectToSend = {};
-                    objectToSend[userAccount] = user;
-                    console.log("this is object to send: ", objectToSend);
-                $.ajax({
-                     url: "http://tiy-fee-rest.herokuapp.com/collections/team2Chat/557e214b24c7a7030000029b",
-                     method: 'PUT',
-                     data: objectToSend,
-                     success: function (data) {
-                      //  console.log("success!!: ", data);
-                       page.yourUsername= userAccount;
-                       page.yourImage= page.selectedImage;
-                       page.yourPassword= password;
-                      //  console.log("these are set for the page: ", page.yourUsername + page.yourImage);
-                      page.turnStuffOff();
-                      $('.whosOnline').empty();
-                       page.loadPeople();
-                      //  $('.loginData').reset();
 
-                     },
-                     error: function (err) {
-                       console.log("error ", err);
-                     }
-              });
-        }
-        else{
-          // console.log("cant create this account");
-          // console.log("page exists");
-          $(".feedbackMessage").addClass('active');
-          $('#response').text('User Already Exists');
-        }
     }
   },
   addOne: function (message) {

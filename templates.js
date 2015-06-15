@@ -2,7 +2,7 @@
 var templates = {};
 
 templates.message = [
- "<% if(_id === '557b32324ef0f403000002a7') { console.log('usernames');%>",
+ "<% if(_id === '557e214b24c7a7030000029b') { console.log('usernames');%>",
  "<% } else { %>",
  "<div class='textWrap'>",
  "<div class='profImageWrap'>",
@@ -21,4 +21,12 @@ templates.message = [
  "</div>",
  "</div>",
  "<% } %>"
+].join("");
+
+templates.Online = [
+  "<% if(Status === 'true') { %>",
+  "<div class= 'person'><img class ='personOnline' src=' <%= image %>' width='35' ><h6 class='WhoIsUser'><%= username %></h6> ",
+  "<% } else { %>",
+  "<div class= 'person'><img class ='personOffline' src=' <%= image %>' width='30' ><h6 class='WhoIsUser'><%= username %></h6> ",
+  "<% } %>"
 ].join("");

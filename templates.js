@@ -11,7 +11,7 @@ templates.message = [
  "</div>",
  "<div class='textBox'>",
  "<article class='message' data-id='<%= _id %>'>",
- "<h3><%= message %></h3>",
+ "<h3 class='message1'><%= message %></h3>",
  "<a href='' name='<%= user %>' class='delete deleteButton'>delete</a> | <a href='' name='<%= user %>' class='editMessage'>edit</a>",
  "<div class='editing'>",
  "<input type='text' class='editMessage' value='<%= message %>'>",

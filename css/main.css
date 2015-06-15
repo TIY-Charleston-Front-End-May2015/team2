@@ -364,8 +364,31 @@ border-radius: 2px;
 .loggedOn h4{
   display:inline-block;
 }
-.logOut{
+.logOut {
   margin-top: 5%;
+  display:none;
+}
+.whosOnline{
+  margin-top: 3em;
+  margin-left: -1em;
+  margin-right: .25em;
+  display:none;
+  height: 28.3em;
+  overflow: scroll;
+  background-origin: border-box;
+  background-color: white;
+}
+.WhoIsUser{
+  display:inline-block;
+}
+.personOffline{
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+.editInfoUser{
+  display:none;
+}
+.editUser{
   display:none;
 }
 
